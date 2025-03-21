@@ -1,1 +1,238 @@
-/* You can add global styles to this file, and also import other style files */
+@use "sass:math"; // Para operaciones matemáticas modernas en Sass
+
+// Asegurar que Bootstrap y Normalize se importen correctamente
+@use "bootstrap/scss/bootstrap"; 
+@use "normalize.css/normalize"; 
+
+/* 🌍 Variables Globales */
+:root {
+  --padding-container: 100px 0;
+  --color-title: #001A49;
+}
+
+/* 🌍 Estilos Globales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body { 
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 📌 Contenedor */
+.container {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* 📌 Menú en móviles */
+.nav__link--menu {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.95);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* ✅ Cuando el menú está activo */
+.nav__link--show {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+}
+
+/* 🌟 Hero */
+.hero {
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  max-height: 800px;
+  position: relative;
+  display: grid;
+  grid-template-rows: 100px 1fr;
+  color: #fff;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(180deg, #0000008c 0%, #0000008c 100%), url("/images/ropa.avif");
+  background-size: cover;
+  background-position: center;
+  clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
+  z-index: -1;
+}
+
+/* 📌 Botón CTA */
+.cta {
+  display: inline-block;
+  background-color: #2091F9;
+  color: #fff;
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 32px;
+  transition: background-color 0.3s ease;
+  font-size: 1rem;
+  text-align: center;
+  max-width: 150px;
+}
+
+.cta:hover {
+  background-color: #1769aa;
+}
+
+/* 📌 Footer */
+.footer {
+  background-color: #001A49;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+/* 📌 About */
+.about {
+  text-align: center;
+  padding: 60px 0;
+}
+
+.about__paragraph {
+  line-height: 1.7;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.about__main {
+  padding-top: 80px;
+  display: grid;
+  width: 90%;
+  margin: 0 auto;
+  gap: 1em;
+  overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(260px, auto));
+}
+
+/* 📌 Iconos */
+.about__icons {
+  display: grid;
+  gap: 1em;
+  justify-items: center;
+  width: 260px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.about__icon {
+  width: 40px;
+}
+
+/* 📌 MEDIA QUERIES */
+
+/* Tablets (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .hero {
+    min-height: 500px;
+    grid-template-rows: auto 1fr;
+  }
+
+  .hero::before {
+    background-position: center;
+  }
+
+  .cta {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+
+  .about__main {
+    padding-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+  }
+}
+
+/* Móviles (max-width: 800px) */
+@media (max-width: 800px) {
+  .hero {
+    min-height: 450px;
+    grid-template-rows: auto 1fr;
+    padding: 0 20px;
+  }
+
+  .hero::before {
+    clip-path: none;
+    background-position: center;
+  }
+
+  .cta {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  .about__main {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+
+  .about__icons {
+    width: 200px;
+  }
+}
+
+/* Móviles Pequeños (max-width: 600px) */
+@media (max-width: 600px) {
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .nav__link--menu {
+    width: 100%;
+  }
+
+  .cta {
+    width: 80%;
+    font-size: 0.9rem;
+  }
+
+  .hero {
+    min-height: 400px;
+    padding: 0 10px;
+  }
+
+  .hero__title {
+    font-size: 2rem;
+  }
+
+  .hero__paragraph {
+    font-size: 1rem;
+  }
+
+  .about {
+    padding: 40px 0;
+  }
+
+  .about__paragraph {
+    font-size: 1rem;
+  }
+
+  .about__icons {
+    width: 180px;
+  }
+}

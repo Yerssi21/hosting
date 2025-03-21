@@ -1,0 +1,34 @@
+<section class="questions container">
+  <h2 class="subtitle fw-bold text-center">Preguntas Frecuentes</h2>
+  <p class="questions__paragraph">
+    Encuentra respuestas a las dudas más comunes sobre LAURRVIC SHOP.
+  </p> 
+
+  <div class="questions__container">
+    <article 
+      *ngFor="let question of questions; let i = index" 
+      class="questions__padding" 
+      [class.questions__padding--add]="question.isOpen"
+    >
+      <div class="questions__answer">
+        <h3 class="questions__title" (click)="toggleAnswer(i)">
+          {{ question.title }}
+          <span class="questions__arrow" [class.questions__arrow--rotate]="question.isOpen">
+            <i class='bx bx-chevron-down-circle questions__img'></i>
+          </span>
+        </h3>
+        
+        <p class="questions__show" [style.height]="question.isOpen ? 'auto' : '0px'">
+          {{ question.answer }}
+        </p>
+      </div>
+    </article>
+  </div>
+
+  <section class="questions__offer text-center"> 
+    <h2 class="subtitle fw-bold">¡Ofertas irresistibles en moda!</h2>
+    <p class="questions__copy">
+      Renueva tu estilo con nuestras últimas colecciones. Desde ropa hasta accesorios, tenemos todo lo que necesitas para brillar.
+    </p>
+  </section>
+</section>

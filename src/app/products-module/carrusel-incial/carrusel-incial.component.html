@@ -1,0 +1,12 @@
+<div #imageSlider class="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <li class="splide__slide" *ngFor="let product of products">
+            <div class="product-card" [style.background]="product.bgColor">
+                <img [src]="product.img" alt="Producto">
+              </div>
+        </li>
+      </ul>
+    </div>
+</div>
+  

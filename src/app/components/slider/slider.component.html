@@ -1,0 +1,23 @@
+<section class="testimony">
+  <h2 class="fw-bold text-center testimony__title">Testimonios</h2>
+  <div class="testimony__container">
+    <!-- Flecha izquierda -->
+    <img src="/images/leftarrow.svg" class="testimony__arrow testimony__arrow--left" (click)="changeTestimony(-1)">
+
+    <!-- Testimonios -->
+    <section class="testimony__body" *ngFor="let testimony of testimonies; let i = index" 
+      [class.testimony__body--show]="i === currentIndex">
+      <figure class="testimony__picture">
+        <img [src]="testimony.image" class="testimony__img" alt="Foto de {{ testimony.name }}">
+      </figure>
+      <div class="testimony__texts">
+        <div class="testimony__stars">&#9733; &#9733; &#9733; &#9733; &#9733;</div>
+        <p class="testimony__review">"{{ testimony.review }}"</p>
+        <p class="testimony__name"><strong>{{ testimony.name }}</strong> - {{ testimony.description }}</p>
+      </div>
+    </section>
+
+    <!-- Flecha derecha -->
+    <img src="/images/rightarrow.svg" class="testimony__arrow testimony__arrow--right" (click)="changeTestimony(1)">
+  </div>
+</section>

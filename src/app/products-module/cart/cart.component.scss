@@ -1,0 +1,14 @@
+.image-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Espacio entre imágenes */
+    margin-bottom: 15px; /* Espacio entre filas */
+  }
+  
+  .background-image {
+    width: 165px; /* Ajusta según necesidad */
+    height: auto;
+    border-radius: 8px; /* Opcional: bordes redondeados */
+    object-fit: cover;
+  }
+  

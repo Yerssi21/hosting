@@ -1,0 +1,16 @@
+<div class="slider-container">
+  <div class="splide">
+    <div class="splide__track">
+      <div class="splide__list">
+        <div class="splide__slide" *ngFor="let step of steps">
+          <app-step-card
+            [stepNumber]="step.stepNumber"
+            [title]="step.title"
+            [description]="step.description"
+            [duration]="step.duration">
+          </app-step-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

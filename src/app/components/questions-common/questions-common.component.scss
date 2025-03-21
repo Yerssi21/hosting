@@ -1,0 +1,136 @@
+/* 🌍 Estilos Generales */
+.questions {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.questions__paragraph {
+  max-width: 700px;
+  margin: 0 auto 30px;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* 📌 Contenedor de Preguntas */
+.questions__container {
+  display: grid;
+  gap: 1em;
+  padding-top: 30px;
+  padding-bottom: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+/* 📌 Estilos de las preguntas */
+.questions__padding {
+  border: 1px solid #5454d4;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease-in-out;
+}
+
+.questions__padding--add {
+  padding-bottom: 20px;
+}
+
+/* 📌 Pregunta */
+.questions__answer {
+  padding: 15px 20px;
+  overflow: hidden;
+}
+
+.questions__title {
+  text-align: left;
+  display: flex;
+  align-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #001a49;
+  justify-content: space-between;
+  transition: color 0.3s ease-in-out;
+}
+
+.questions__title:hover {
+  color: #2091f9;
+}
+
+/* 📌 Flecha animada */
+.questions__arrow {
+  border-radius: 50%;
+  background-color: #2091f9;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s;
+}
+
+.questions__arrow--rotate {
+  transform: rotate(180deg);
+}
+
+.questions__img {
+  font-size: 24px;
+  color: #fff;
+}
+
+/* 📌 Respuesta */
+.questions__show {
+  text-align: left;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+/* 📌 Sección de Ofertas */
+.questions__offer {
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+}
+
+.questions__copy {
+  max-width: 600px;
+  margin: 0 auto;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* 📌 Títulos */
+.subtitle {
+  font-size: 2.2rem;
+  color: #001a49;
+  margin-bottom: 20px;
+}
+
+/* 📱 Media Queries */
+@media (max-width: 768px) {
+  .questions__title {
+    font-size: 1.1rem;
+  }
+
+  .questions__arrow {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .subtitle {
+    font-size: 1.8rem;
+  }
+
+  .questions__paragraph {
+    font-size: 1rem;
+  }
+
+  .questions__title {
+    font-size: 1rem;
+  }
+
+  .questions__copy {
+    font-size: 0.9rem;
+  }
+}

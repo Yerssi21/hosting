@@ -1,0 +1,55 @@
+/* 🌟 Estilos de Contacto */
+.contacto {
+  background-color: #f8f9fa;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* 📌 Contenedor */
+.container {
+  max-width: 800px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* 📌 Información */
+.col_informacion {
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #001a49;
+}
+
+/* 📌 Formulario */
+.col_form {
+  width: 100%;
+}
+
+.hubspot-form {
+  width: 100%;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* 📱 Responsivo */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+}

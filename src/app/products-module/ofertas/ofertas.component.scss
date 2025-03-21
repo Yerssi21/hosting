@@ -1,0 +1,16 @@
+// Ofertas Especiales
+
+.banner {
+    position: relative;
+    background: url('/carrusel/foto-ofertas-especiales.jpg') center/cover no-repeat;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.banner-overlay {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 30px;
+    border-radius: 8px;
+    text-align: center;
+}

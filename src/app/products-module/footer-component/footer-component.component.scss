@@ -1,0 +1,157 @@
+/* 🌍 Footer General */
+.footer {
+  background-color: #001A49;
+  color: white;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+/* 📌 Contenedor del Footer */
+.footer__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 📝 Título */
+.footer__title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+/* 📌 Links de Navegación */
+.footer__nav {
+  text-align: left;
+}
+
+.footer__links {
+  list-style: none;
+  padding: 0;
+}
+
+.footer__link {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  margin: 5px 0;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer__link:hover {
+  color: #2091f9;
+}
+
+/* 📩 Newsletter */
+.footer__newsletter h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footer__form {
+  display: flex;
+  gap: 10px;
+}
+
+.footer__input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+.footer__submit {
+  background-color: #2091f9;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.footer__submit:hover {
+  background-color: #1769aa;
+}
+
+/* 🔗 Redes Sociales */
+.footer__social h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.footer__icons {
+  display: flex;
+  gap: 10px;
+}
+
+.footer__icon img {
+  width: 30px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.footer__icon:hover img {
+  transform: scale(1.1);
+}
+
+/* 📌 Copyright */
+.footer__copy {
+  padding-top: 20px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 📱 Media Queries */
+@media (max-width: 992px) {
+  .footer__container {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+
+  .footer__info,
+  .footer__newsletter,
+  .footer__social {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+
+  .footer__nav {
+    text-align: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer__form {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer__input {
+    width: 100%;
+  }
+
+  .footer__submit {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer__title {
+    font-size: 1.8rem;
+  }
+
+  .footer__link {
+    font-size: 0.9rem;
+  }
+
+  .footer__copy {
+    font-size: 0.8rem;
+  }
+}

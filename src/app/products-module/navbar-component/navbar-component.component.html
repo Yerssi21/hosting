@@ -1,0 +1,46 @@
+<nav class="nav" [ngClass]="{ 'scrolled': isScrolled, 'menu-open': isMenuOpen }">
+  <div class="nav__container">
+    <!-- LOGO -->
+    <div class="nav__logo">
+      <h2 class="nav__title"><a href="#inicio" (click)="closeMenu()">LAURRVIC <span>SHOP</span></a></h2>
+    </div>
+
+    <!-- Menú de navegación -->
+    <ul class="nav__links" [ngClass]="{ 'nav__links--show': isMenuOpen }">
+      <li class="nav__item"><a href="#acerca" class="nav__link" (click)="closeMenu()">Sobre Nosotros</a></li>
+      <li class="nav__item"><a href="#ofertas" class="nav__link" (click)="closeMenu()">Ofertas</a></li>
+      <li class="nav__item"><a href="#servicios" class="nav__link" (click)="closeMenu()">Servicios</a></li>
+      <li class="nav__item"><a href="#testimonios" class="nav__link" (click)="closeMenu()">Testimonios</a></li>
+    </ul>
+
+    <!-- Botones a la derecha -->
+    <div class="nav__actions">
+      <button class="nav__btn nav__btn--outline">
+        <i class="bx bx-phone"></i> Contacta
+      </button>
+      <button class="nav__btn nav__btn--filled">
+        Particulares
+      </button>
+      <div class="nav__user">
+        <i class="bx bx-user"></i> <span>Área Cliente</span>
+      </div>
+      <div class="nav__lang">
+        <span>ES</span>
+      </div>
+    </div>
+
+    <!-- Ícono menú móvil -->
+    <div class="nav__menu" (click)="toggleMenu()">
+      <i class='bx bx-menu-alt-right'></i>
+    </div>
+  </div>
+</nav>
+
+  
+<section class="hero__container container">
+    <h1 class="hero__title">Variedad, calidad y estilo. Siempre a tu alcance, al mejor precio</h1>
+    <p class="hero__paragraph">¡Compra y gana al instante! En Laurrvic Shop, cada compra te acerca a premios exclusivos. 🎁🔥 ¡Haz clic y participa!</p>
+      <div class="hero__cta-container">
+      <a href="#" type="button" class="btn btn-warning text-uppercase">contáctanos</a>
+    </div>
+</section>

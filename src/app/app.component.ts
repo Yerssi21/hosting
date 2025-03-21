@@ -1,12 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { FooterComponentComponent } from "./products-module/footer-component/footer-component.component";
+import { NavbarComponentComponent } from "./products-module/navbar-component/navbar-component.component";;
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [CommonModule, RouterOutlet,FooterComponentComponent, NavbarComponentComponent, ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: [ './app.component.scss']
 })
 export class AppComponent {
   title = 'hosting';
+
+  
 }
