@@ -1,0 +1,13 @@
+@use "sass:math";
+@use "bootstrap";
+@use "normalize-scss";
+@use "@splidejs/splide/dist/css/splide.min.css";
+
+// ✅ Importa tus módulos locales
+@use "./variables";
+@use "./globals";
+@use "./layout";
+@use "./navbar";
+@use "./footer";
+@use "./about";
+@use "./media-queries";

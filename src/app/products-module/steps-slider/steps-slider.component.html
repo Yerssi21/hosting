@@ -1,16 +1,29 @@
-<div class="slider-container">
-  <div class="splide">
-    <div class="splide__track">
-      <div class="splide__list">
-        <div class="splide__slide" *ngFor="let step of steps">
-          <app-step-card
-            [stepNumber]="step.stepNumber"
-            [title]="step.title"
-            [description]="step.description"
-            [duration]="step.duration">
-          </app-step-card>
+<div class="steps-header">
+  <h4>
+    Vende tus productos en tiempo récord con LAURRVIC Shop
+  </h4>
+  <p>
+    Nuestro proceso simplificado en 5 pasos te guía desde la idea hasta tu primera venta en menos de una hora.
+  </p>
+</div>
+<div
+  class="splide"
+  appSplideCarousel
+  [perPage]="5"
+  [gap]="'1rem'"
+  [autoplay]="false"
+>
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" *ngFor="let step of steps; index as i">
+        <div class="step-card">
+          <p class="step-label">Paso {{ i + 1 }}</p>
+          <h3 class="step-title">{{ step.title }}</h3>
+          <p class="step-desc">{{ step.description }}</p>
+          <p class="step-time"><em>{{ step.duration }}</em></p>
+          <img *ngIf="step.image" [src]="step.image" alt="Paso {{ i + 1 }}">
         </div>
-      </div>
-    </div>
+      </li>
+    </ul>
   </div>
 </div>

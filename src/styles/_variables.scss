@@ -1,0 +1,35 @@
+/* ================================================
+   🌐 VARIABLES GLOBALES Y BREAKPOINTS RESPONSIVOS
+   ================================================ */
+
+/* 🎨 Variables CSS nativas para acceso en JavaScript o CSS puro */
+:root {
+  --padding-container: 100px 0;
+  --color-title: #001A49;
+  --color-primary: #2091F9;
+  --color-secondary: #001A49;
+  --color-text: #333;
+  --font-main: "Poppins", sans-serif;
+}
+
+/* 🧱 Breakpoints móviles y de escritorio */
+$breakpoints: (xs: 600px, // teléfonos
+  sm: 768px, // tablets
+  md: 992px, // laptops
+  lg: 1200px, // escritorios grandes
+);
+
+/* 🛠️ Mixin reutilizable para aplicar media queries limpias */
+@mixin respond-to($breakpoint) {
+  $size: map-get($breakpoints, $breakpoint);
+
+  @if $size {
+    @media (max-width: $size) {
+      @content;
+    }
+  }
+
+  @else {
+    @warn "⚠️ El breakpoint '#{$breakpoint}' no está definido en \$breakpoints.";
+  }
+}

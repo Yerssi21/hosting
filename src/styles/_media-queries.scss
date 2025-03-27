@@ -1,0 +1,107 @@
+@use "../styles/variables" as *;
+
+.hero {
+  @include respond-to("lg") {
+    min-height: 500px;
+    grid-template-rows: auto 1fr;
+  }
+
+  @include respond-to("md") {
+    min-height: 450px;
+    padding: 0 20px;
+    grid-template-rows: auto 1fr;
+  }
+
+  @include respond-to("xs") {
+    min-height: 400px;
+    padding: 0 10px;
+  }
+}
+
+.hero__title {
+  @include respond-to("xs") {
+    font-size: 2rem;
+  }
+}
+
+.hero__paragraph {
+  @include respond-to("xs") {
+    font-size: 1rem;
+  }
+}
+
+.cta {
+  @include respond-to("lg") {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+
+  @include respond-to("md") {
+    font-size: 1rem;
+    padding: 10px 20px;
+  }
+
+  @include respond-to("xs") {
+    width: 80%;
+    font-size: 0.9rem;
+  }
+}
+
+.about {
+  @include respond-to("xs") {
+    padding: 40px 0;
+  }
+}
+
+.about__paragraph {
+  @include respond-to("xs") {
+    font-size: 1rem;
+  }
+}
+
+.about__main {
+  @include respond-to("lg") {
+    padding-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+  }
+
+  @include respond-to("md") {
+    grid-template-columns: 1fr;
+    gap: 2em;
+  }
+}
+
+.about__icons {
+  @include respond-to("md") {
+    width: 200px;
+  }
+
+  @include respond-to("xs") {
+    width: 180px;
+  }
+}
+
+.nav__link--menu {
+  @include respond-to("xs") {
+    width: 100%;
+  }
+}
+
+.footer {
+  @include respond-to("xs") {
+    text-align: center;
+    padding: 1rem;
+  }
+}
+
+.container {
+  @include respond-to("xs") {
+    padding: 0 1rem;
+  }
+}
+
+html, body {
+  @include respond-to("xs") {
+    font-size: 14px;
+  }
+}

@@ -3,6 +3,7 @@ import { Component, CUSTOM_ELEMENTS_SCHEMA, HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-navbar-component',
+  standalone: true,
   imports: [CommonModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   templateUrl: './navbar-component.component.html',

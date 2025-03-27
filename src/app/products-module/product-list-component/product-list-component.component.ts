@@ -7,6 +7,7 @@ import { ProductCardComponentComponent } from "../product-card-component/product
 
 @Component({
   selector: 'app-product-list-component',
+  standalone: true,
   imports: [CommonModule, ProductCardComponentComponent],
   templateUrl: './product-list-component.component.html',
   styleUrl: './product-list-component.component.scss',

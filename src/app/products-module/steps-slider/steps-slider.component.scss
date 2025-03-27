@@ -1,16 +1,80 @@
-.slider-container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 20px 0;
+:host {
+  display: block;
+  background-color: #002C41; // Fondo oscuro
+  padding: 4rem 1rem;
 }
+
+.steps-header {
+    text-align: center;
+    padding: 0 1.5rem;
+    max-width: 900px;
+    margin: 0 auto 3rem auto;
+  
+    h4 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ffffff;
+    }
+  
+    p {
+      font-size: 1.125rem;
+      color: #d6e8f0;
+      margin-bottom: 2rem;
+    }
+  }
 
 .splide {
-  width: 100%;
+  margin: 0 auto;
+  max-width: 1200px;
 }
 
-.splide__slide {
-    display: flex !important; /* Asegurar que las imágenes estén en fila */
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+
+.step-card {
+  position: relative;
+  /* para posicionar el badge */
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+
+  img {
+    max-width: 100%;
+    margin-top: 1rem;
+  }
+
+  .step-label {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+
+  .step-title {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-desc {
+    flex: 1;
+    font-size: 1rem;
+  }
+
+  .step-time {
+    font-style: italic;
+    color: #888;
+    margin-top: 0.5rem;
+  }
 }

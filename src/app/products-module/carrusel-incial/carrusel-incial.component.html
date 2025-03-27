@@ -1,12 +1,11 @@
-<div #imageSlider class="splide">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <li class="splide__slide" *ngFor="let product of products">
-            <div class="product-card" [style.background]="product.bgColor">
-                <img [src]="product.img" alt="Producto">
-              </div>
-        </li>
-      </ul>
-    </div>
+<div class="splide" appSplideCarousel [perPage]="4" [autoplay]="true" [interval]="2000" [gap]="'1.5rem'">
+  <div class="splide__track">
+    <ul class="splide__list">
+      <li class="splide__slide" *ngFor="let product of products">
+        <div class="product-card" [style.background]="product.bgColor">
+          <img [src]="product.img" alt="Producto" />
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>
-  

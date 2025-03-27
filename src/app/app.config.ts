@@ -1,8 +1,49 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { DefaultLayoutComponent } from './layouts/default-layout/default-layout.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { provideRouter, Routes } from '@angular/router';
 
-import { routes } from './app.routes';
+export const routes: Routes = [
+  {
+    path: '',
+    component: DefaultLayoutComponent, // ahora este gestiona el layout general
+    children: [
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      {
+        path: 'home',
+        loadComponent: () =>
+          import('./home/home.component').then(m => m.HomeComponent)
+      },
+      {
+        path: 'productos',
+        loadChildren: () =>
+          import('./products-module/products.routes').then(m => m.routes)
+      }
+    ]
+  },
+  {
+    path: 'auth',
+    component: AuthLayoutComponent, // limpio, solo forms
+    children: [
+      {
+        path: 'login',
+        loadComponent: () =>
+          import('./auth/login/login.component').then(m => m.LoginComponent)
+      },
+      {
+        path: 'registro',
+        loadComponent: () =>
+          import('./auth/register/register.component').then(m => m.RegisterComponent)
+      },
+      {
+        path: 'recuperar',
+        loadComponent: () =>
+          import('./auth/forgot-password/forgot-password.component').then(m => m.ForgotPasswordComponent)
+      }
+    ]
+  },
+  { path: '**', redirectTo: 'home' }
+];
 
-export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes)]
-};
+export const appConfig = [
+  provideRouter(routes)
+];

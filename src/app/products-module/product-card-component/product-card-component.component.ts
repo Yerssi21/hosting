@@ -3,6 +3,7 @@ import { Category } from '../../models/category';
 
 @Component({
   selector: 'app-product-card-component',
+  standalone: true,
   imports: [],
   templateUrl: './product-card-component.component.html',
   styleUrl: './product-card-component.component.scss'

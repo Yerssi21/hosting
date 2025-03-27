@@ -1,0 +1,33 @@
+.pf-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: #E40F0A;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  
+  .pf-btn:hover {
+    background-color: #0056b3;
+  }
+  
+  .pf-h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  
+  .pf-text-center {
+    text-align: center;
+  }
+  
+  .pf-py-64 {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+  
+  /* Agrega más clases según lo que necesites */
+  
