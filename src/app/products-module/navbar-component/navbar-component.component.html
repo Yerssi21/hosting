@@ -7,19 +7,20 @@
 
     <!-- Menú de navegación -->
     <ul class="nav__links" [ngClass]="{ 'nav__links--show': isMenuOpen }">
-      <li class="nav__item"><a href="#acerca" class="nav__link" (click)="closeMenu()">Sobre Nosotros</a></li>
-      <li class="nav__item"><a href="#ofertas" class="nav__link" (click)="closeMenu()">Ofertas</a></li>
-      <li class="nav__item"><a href="#servicios" class="nav__link" (click)="closeMenu()">Servicios</a></li>
-      <li class="nav__item"><a href="#testimonios" class="nav__link" (click)="closeMenu()">Testimonios</a></li>
+      <li class="nav__item"><a href="#acerca" class="nav__link" (click)="closeMenu()">Vender en Linea</a></li>
+      <li class="nav__item"><a routerLink="/haz-tu-pedido" class="nav__link" (click)="closeMenu()">Haz el pedido tú mismo</a></li>
+      <li class="nav__item"><a href="#servicios" class="nav__link" (click)="closeMenu()">Obtenga soporte empresarial</a></li>
     </ul>
 
     <!-- Botones a la derecha -->
     <div class="nav__actions">
-      <button class="nav__btn nav__btn--outline">
-        <i class="bx bx-phone"></i> Contacta
+      <button class="nav__btn nav__btn--outline" routerLink="/auth/login">
+          <i class="bx bx-log-in"></i>
+        <span class="nav__btn--outline-text">Iniciar sesión</span>
       </button>
-      <button class="nav__btn nav__btn--filled">
-        Particulares
+      <button class="nav__btn nav__btn--filled"  routerLink="/auth/registro">
+        <i class="bx bx-user"></i>
+        <span class="nav__btn--filled-text">Incribirse</span>
       </button>
       <div class="nav__user">
         <i class="bx bx-user"></i> <span>Área Cliente</span>
@@ -37,10 +38,17 @@
 </nav>
 
   
-<section class="hero__container container">
-    <h1 class="hero__title">Variedad, calidad y estilo. Siempre a tu alcance, al mejor precio</h1>
-    <p class="hero__paragraph">¡Compra y gana al instante! En Laurrvic Shop, cada compra te acerca a premios exclusivos. 🎁🔥 ¡Haz clic y participa!</p>
-      <div class="hero__cta-container">
-      <a href="#" type="button" class="btn btn-warning text-uppercase">contáctanos</a>
-    </div>
+<!-- Dentro de layout -->
+<section class="hero">
+  <div class="hero__container container">
+    <ng-container *ngIf="router.url === '/home'; else otherHero">
+      <h1 class="hero__title">Variedad, calidad y estilo...</h1>
+      <p class="hero__paragraph">¡Compra y gana al instante!...</p>
+    </ng-container>
+    <ng-template #otherHero>
+      <h1 class="hero__title">Crea tu pedido personalizado</h1>
+      <p class="hero__paragraph">Selecciona tus productos y hazlo único 🎨</p>
+    </ng-template>
+  </div>
 </section>
+

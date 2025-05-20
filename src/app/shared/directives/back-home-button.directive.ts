@@ -1,12 +1,12 @@
-import { Directive, ElementRef, Input, OnInit, Renderer2 } from '@angular/core';
+import { Directive, Input, OnInit, Renderer2, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Directive({
-  selector: '[appBackButtonTo]',
-  standalone: true 
+  selector: '[appBackHomeButton]',
+  standalone: true,
 })
 export class BackHomeButtonDirective implements OnInit {
-  @Input() appBackButtonTo: string = '/';
+  @Input() appBackHomeButton: string = '/';
 
   constructor(
     private el: ElementRef,
@@ -15,20 +15,21 @@ export class BackHomeButtonDirective implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const button = this.renderer.createElement('a');
-    this.renderer.addClass(button, 'back-btn');
-    this.renderer.setStyle(button, 'cursor', 'pointer');
+    const btn = this.renderer.createElement('a');
+    this.renderer.setAttribute(btn, 'role', 'button');
+    this.renderer.addClass(btn, 'back-btn');
+    this.renderer.setStyle(btn, 'cursor', 'pointer');
 
     const icon = this.renderer.createText('← ');
-    const text = this.renderer.createText('Volver');
+    const label = this.renderer.createText('Volver');
 
-    this.renderer.appendChild(button, icon);
-    this.renderer.appendChild(button, text);
-    this.renderer.listen(button, 'click', () => {
-      this.router.navigate([this.appBackButtonTo]);
+    this.renderer.appendChild(btn, icon);
+    this.renderer.appendChild(btn, label);
+
+    this.renderer.listen(btn, 'click', () => {
+      this.router.navigate([this.appBackHomeButton]);
     });
 
-    // Insertamos al principio del elemento
-    this.renderer.insertBefore(this.el.nativeElement, button, this.el.nativeElement.firstChild);
+    this.renderer.appendChild(this.el.nativeElement, btn);
   }
 }

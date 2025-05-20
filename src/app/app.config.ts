@@ -17,7 +17,13 @@ export const routes: Routes = [
         path: 'productos',
         loadChildren: () =>
           import('./products-module/products.routes').then(m => m.routes)
-      }
+      },
+      {
+        path: 'haz-tu-pedido',
+        loadComponent: () =>
+          import('./products-module/haz-tu-pedido/haz-tu-pedido.component').then(m => m.HazTuPedidoComponent),
+      },
+      
     ]
   },
   {

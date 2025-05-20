@@ -1,8 +1,40 @@
 .auth-layout {
   min-height: 100vh;
+  background: linear-gradient(135deg, #74ebd5, #9face6); // Fondo degradado
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.auth-page {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f8f9fa;
-  padding: 2rem;
 }
+
+.back-button-container {
+  position: absolute;
+  top: 1.5rem;
+  left: 1.5rem;
+  padding: 0.5rem;
+}
+.back-btn {
+  display: inline-block;
+  background-color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
+}
+
+.back-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+

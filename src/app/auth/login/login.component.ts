@@ -1,12 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { BackHomeButtonDirective } from '../../shared/directives/back-home-button.directive';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, BackHomeButtonDirective],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -14,17 +19,34 @@ import { BackHomeButtonDirective } from '../../shared/directives/back-home-butto
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private toast: ToastService
+  ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  onSubmit(): void {
-    if (this.loginForm.valid) {
-      console.log('Login data:', this.loginForm.value);
-      // Aquí puedes llamar al servicio de autenticación
-    }
+  onSubmit() {
+    if (this.loginForm.invalid) return;
+    // Simular éxito
+    this.toast.show({
+      message: 'Bienvenido de nuevo!',
+      type: 'success',
+      duration: 3000
+    });
+    // Simular login y redirección
+    this.router.navigate(['/home']);
+  }
+
+  get email() {
+    return this.loginForm.get('email')!;
+  }
+
+  get password() {
+    return this.loginForm.get('password')!;
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../../models/category';
-import { ProductService } from '../../services/product.service';
+import { Category } from '../../shared/models/category';
+import { ProductService } from '../../shared/services/product.service';
 import { CommonModule } from '@angular/common';
 import { style, animate, transition } from '@angular/animations';
 import { ProductCardComponentComponent } from "../product-card-component/product-card-component.component";

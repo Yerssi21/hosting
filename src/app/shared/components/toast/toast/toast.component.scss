@@ -1,0 +1,50 @@
+.toast {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 9999;
+  min-width: 200px;
+  animation: fadeIn 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+
+  &.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &.success {
+    background-color: #28a745;
+  }
+
+  &.error {
+    background-color: #dc3545;
+  }
+
+  &.info {
+    background-color: #007bff;
+  }
+
+  &.warning {
+    background-color: #ffc107;
+    color: #222;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
