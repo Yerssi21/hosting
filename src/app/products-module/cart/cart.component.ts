@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-cart',
   imports: [CommonModule],
   standalone: true,
   templateUrl: './cart.component.html',
-  styleUrl: './cart.component.scss'
+  styleUrl: './cart.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartComponent {
   images: string[] = [

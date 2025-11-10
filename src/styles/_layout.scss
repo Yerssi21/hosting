@@ -1,9 +1,14 @@
+/* =========================
+   HERO BASE
+   ========================= */
+
 .hero {
+  position: relative;
+  z-index: 0;
   width: 100%;
   height: 100vh;
   min-height: 600px;
   max-height: 800px;
-  position: relative;
   display: grid;
   grid-template-rows: 100px 1fr;
   color: #fff;
@@ -12,96 +17,165 @@
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('/images/ropa.avif') center/cover no-repeat;
-  animation: fadeZoomFloat 40s infinite ease-in-out;
-  background-size: cover;
-  background-position: center;
+  inset: 0;
+  background:
+    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
+    url('/images/ropa.avif') center / cover no-repeat;
   clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
   z-index: -1;
+  transition: background-image 0.4s ease-in-out, transform 0.4s ease-in-out;
 }
 
-.home-hero::before {
-  background-image: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('/images/ropa.avif');
+/* Contenido centrado */
+.hero__container {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 0 1rem;
 }
 
-.pedido-hero::before {
-  background-image: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url('/images/pedido.avif');
+.hero__title {
+  font-size: clamp(2rem, 3vw + 1rem, 3rem);
+  margin: 0 0 .5rem;
 }
 
-.default-hero::before {
-  background-color: #333;
+.hero__paragraph {
+  margin: 0;
+  opacity: .9;
 }
 
+/* =========================
+   VARIANTES POR PANTALLA
+   ========================= */
+
+.hero.hero--home::before {
+  background-image:
+    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
+    url('/images/home-uno.jpg');
+}
+
+.hero.hero--venta::before {
+  background-image:
+    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
+    url('/images/venta-online.jpg');
+}
+
+.hero.hero--soporte::before {
+  background-image:
+    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
+    url('/images/soporte.jpg');
+}
+
+.hero.hero--cliente::before {
+  background-image:
+    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
+    url('/images/cliente.jpg');
+}
+
+/* Hero oculto si alguna ruta no lo usa */
+.hero.hero--hidden {
+  display: none;
+}
+
+/* Quitar ola si alguna ruta lo pide */
+.hero.hero--no-clip::before {
+  clip-path: none;
+}
+
+/* Animaciones opcionales (si quieres usarlas en otras rutas) */
+.hero.hero--anim-zoom::before     { animation: zoomBg 25s infinite ease-in-out; }
+.hero.hero--anim-float::before    { animation: floatBg 30s infinite ease-in-out; }
+.hero.hero--anim-fadezoom::before { animation: fadeZoomFloat 40s infinite ease-in-out; }
+
+@keyframes zoomBg {
+  0%,100% { transform: scale(1); }
+  50%     { transform: scale(1.05); }
+}
+
+@keyframes floatBg {
+  0%,100% { background-position: center; }
+  50%     { background-position: center 40%; }
+}
+
+@keyframes fadeZoomFloat {
+  0%,100% { transform: scale(1); background-position:center; }
+  50%     { transform: scale(1.05); background-position:center top; }
+}
+
+/* CTA de ejemplo (si lo usas) */
 .cta {
   display: inline-block;
-  background-color: #2091F9;
+  background: #2091F9;
   color: #fff;
   text-decoration: none;
   padding: 12px 28px;
   border-radius: 32px;
-  transition: background-color 0.3s ease;
+  transition: background-color .3s ease;
   font-size: 1rem;
   text-align: center;
-  max-width: 150px;
 }
+.cta:hover { background:#1769aa; }
 
-.cta:hover {
-  background-color: #1769aa;
-}
-
-@keyframes fadeBg {
-  0%, 100% {
-    background-position: center;
-  }
-  50% {
-    background-position: center top;
+/* Responsive */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-rows: 80px 1fr;
+    min-height: 520px;
   }
 }
 
-// sensación de profundidad
-// .hero::before {
-//   animation: zoomBg 25s infinite ease-in-out;
-// }
-
-@keyframes zoomBg {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
+@media (prefers-reduced-motion: reduce) {
+  .hero::before {
+    animation: none !important;
   }
 }
 
-// Da un toque de "vida" al fondo
-// .hero::before {
-//   animation: floatBg 30s infinite ease-in-out;
-// }
+/* =========================================
+   HERO "HAZ TU PEDIDO" - SOLO AQUÍ
+   ========================================= */
 
-@keyframes floatBg {
-  0%, 100% {
-    background-position: center;
-  }
-  50% {
-    background-position: center 40%;
-  }
+/* Usamos una variable para la imagen actual.
+   Si nadie la toca, muestra la primera. */
+.hero.hero--pedido::before {
+  clip-path: none; /* sin ola */
+  background:
+    linear-gradient(135deg, rgba(0,0,0,.45), rgba(0,0,0,.70)),
+    var(--pedido-current, url('/images/pedido-1.jpg'));
+  background-size: cover;
+  background-position: center;
 }
 
-// Combinación (pro) — ¡Este es el combo más 🔥!
-// .hero::before {
-//   animation: fadeZoomFloat 40s infinite ease-in-out;
-// }
+/* Dots (solo estilo visual, la lógica la manejamos en TS) */
+.hero__dots {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 5;
+}
 
-@keyframes fadeZoomFloat {
-  0%, 100% {
-    transform: scale(1);
-    background-position: center;
-  }
-  50% {
-    transform: scale(1.05);
-    background-position: center top;
-  }
+.hero__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  background: transparent;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+/* Punto activo */
+.hero__dot.is-active {
+  background: #fff;
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Hover: que se sienta clicable */
+.hero__dot:hover {
+  opacity: 1;
+  transform: scale(1.25);
 }

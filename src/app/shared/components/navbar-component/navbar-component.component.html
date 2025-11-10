@@ -1,0 +1,128 @@
+<nav class="app-nav" role="navigation"
+     [ngClass]="{ 'scrolled': isScrolled, 'menu-open': isMenuOpen }"
+     aria-label="Navegación principal">
+  <div class="app-nav__container">
+    <!-- LOGO -->
+    <div class="app-nav__logo">
+      <h2 class="app-nav__title">
+        <a routerLink="/home" (click)="closeMenu()">LAURRVIC <span>SHOP</span></a>
+      </h2>
+    </div>
+
+    <!-- Menú de navegación -->
+    <ul class="app-nav__links"
+        [ngClass]="{ 'app-nav__links--show': isMenuOpen }"
+        [attr.aria-hidden]="!isMenuOpen"
+        [attr.aria-expanded]="isMenuOpen">
+      <li class="app-nav__item">
+        <a routerLink="/venta-online" class="app-nav__link" (click)="closeMenu()">Vender en Linea</a>
+      </li>
+      <li class="app-nav__item">
+        <a routerLink="/haz-tu-pedido" class="app-nav__link" (click)="closeMenu()">Haz el pedido tú mismo</a>
+      </li>
+      <li class="app-nav__item">
+        <a routerLink="/soporte-empresarial" class="app-nav__link" (click)="closeMenu()">Obtenga soporte empresarial</a>
+      </li>
+    </ul>
+
+    <!-- Acciones -->
+    <div class="app-nav__actions">
+      <button type="button" class="app-nav__btn app-nav__btn--outline" routerLink="/auth/login" (click)="closeMenu()">
+        <i class="bx bx-log-in"></i>
+        <span class="app-nav__btn--outline-text">Iniciar sesión</span>
+      </button>
+      <button type="button" class="app-nav__btn app-nav__btn--filled" routerLink="/auth/register" (click)="closeMenu()">
+        <i class="bx bx-user"></i>
+        <span class="app-nav__btn--filled-text">Incribirse</span>
+      </button>
+      <div class="app-nav__user" routerLink="/area-cliente">
+        <i class="bx bx-user" ></i> <span>Área Cliente</span>
+      </div> 
+      <div class="app-nav__lang" aria-label="Idioma actual">ES</div>
+    </div>
+
+    <!-- Ícono menú móvil -->
+    <button type="button" class="app-nav__menu" (click)="toggleMenu()" aria-label="Abrir menú" [attr.aria-pressed]="isMenuOpen">
+      <i class='bx bx-menu-alt-right' aria-hidden="true"></i>
+    </button>
+  </div>
+</nav>
+
+<!-- Menú móvil a pantalla completa -->
+<div
+  class="app-menu-overlay"
+  *ngIf="isMenuOpen"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="appMenuTitle"
+  (click)="closeMenu()"
+>
+  <div class="app-menu-overlay__panel" (click)="$event.stopPropagation()">
+    <!-- Cerrar -->
+    <button class="app-menu-overlay__close" (click)="closeMenu()" aria-label="Cerrar menú">
+      <i class="bx bx-x"></i>
+    </button>
+
+    <h3 id="appMenuTitle" class="app-menu-overlay__title">MENÚ</h3>
+
+    <!-- Lista principal -->
+    <ul class="app-menu-overlay__list">
+      <li class="app-menu-overlay__item">
+        <a class="app-menu-overlay__link" routerLink="/venta-online" (click)="closeMenu()">
+          Vender en Línea <i class="bx bx-chevron-right"></i>
+        </a>
+      </li>
+      <li class="app-menu-overlay__item">
+        <a class="app-menu-overlay__link" routerLink="/haz-tu-pedido" (click)="closeMenu()">
+          Haz el pedido tú mismo <i class="bx bx-chevron-right"></i>
+        </a>
+      </li>
+      <li class="app-menu-overlay__item">
+        <a class="app-menu-overlay__link" routerLink="/soporte-empresarial" (click)="closeMenu()">
+          Obtenga soporte empresarial <i class="bx bx-chevron-right"></i>
+        </a>
+      </li>
+    </ul>
+
+    <!-- CTAs -->
+    <div class="app-menu-overlay__ctas">
+      <button class="cta cta--warning" routerLink="/contacto" (click)="closeMenu()">CONTACTA</button>
+      <button class="cta cta--primary" routerLink="/area-cliente" (click)="closeMenu()">
+        <i class="bx bx-user"></i> ÁREA CLIENTE
+      </button>
+      <a class="cta cta--outline" href="mailto:soporte@laurrvic.com" (click)="closeMenu()">SOPORTE&#64;LAURRVIC.COM</a>
+      <a class="cta cta--outline" href="tel:+57100000000" (click)="closeMenu()">
+        <i class="bx bx-phone-call"></i> (+57) 100 00 00 00
+      </a>
+    </div>
+
+    <div class="app-menu-overlay__meta">LUN–VIERNES, 9H–19H</div>
+  </div>
+</div>
+<!-- Fin menú móvil a pantalla completa -->
+
+
+<!-- HERO global (usa _layout.scss). Se oculta si hero === 'none' -->
+<section *ngIf="hero() !== 'none'"
+         class="hero"
+         [ngClass]="['hero--' + hero(), anim() ? 'hero--anim-' + anim() : '']">
+  <div class="hero__container container">
+    <h1 class="hero__title">{{ heroText[hero()].title }}</h1>
+    <p class="hero__paragraph">{{ heroText[hero()].subtitle }}</p>
+  </div>
+
+   <!-- ✅ Indicadores del carrusel -->
+ 
+  <div class="hero__dots">
+    <button
+      class="hero__dot"
+      *ngFor="let img of pedidoSlides; let i = index"
+      [class.is-active]="i === pedidoActive"
+      (mouseenter)="onPedidoDotHover(i)">
+    </button>
+  </div>
+</section>
+
+<!-- Fin HERO global --> 
+
+

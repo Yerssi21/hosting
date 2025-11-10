@@ -1,27 +1,114 @@
 /* ================================================
-   🌐 VARIABLES GLOBALES Y BREAKPOINTS RESPONSIVOS
+   🌐 TOKENS GLOBALES (CSS Variables + SCSS)
+   ÚNICA FUENTE DE VERDAD PARA COLORES, TIPOS, ETC.
    ================================================ */
 
-/* 🎨 Variables CSS nativas para acceso en JavaScript o CSS puro */
+@use "sass:map";
+
+/* ================================
+   CSS VARIABLES (runtime / theming)
+   ================================ */
 :root {
-  --padding-container: 100px 0;
-  --color-title: #001A49;
-  --color-primary: #2091F9;
-  --color-secondary: #001A49;
-  --color-text: #333;
-  --font-main: "Poppins", sans-serif;
+  /* Layout */
+  --lv-container: 1200px;
+  --lv-padding-container: 100px 0;
+  --lv-radius-sm: 8px;
+  --lv-radius: 16px;
+  --lv-radius-full: 999px;
+  --lv-shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --lv-shadow-md: 0 10px 30px rgba(15, 23, 42, 0.14);
+
+  /* Colores base */
+  --lv-bg: #ffffff;
+  --lv-surface: #f6f8fb;
+  --lv-surface-soft: #f9fafb;
+  --lv-text: #111827;
+  --lv-muted: #6b7280;
+  --lv-border-subtle: rgba(148, 163, 253, 0.18);
+
+  /* Marca */
+  --lv-primary: #2091F9;
+  --lv-primary-soft: #e0f2ff;
+  --lv-primary-dark: #1d4ed8;
+  --lv-secondary: #001A49;
+  --lv-accent: #A2C08C;
+  --lv-title: #001A49;
+
+  /* Estados */
+  --lv-success: #22c55e;
+  --lv-warning: #f59e0b;
+  --lv-danger: #ef4444;
+
+  /* Tipografía */
+  --lv-font-main: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Espaciado */
+  --lv-s-1: .5rem;   /* 8px */
+  --lv-s-2: 1rem;    /* 16px */
+  --lv-s-3: 1.5rem;  /* 24px */
+  --lv-s-4: 2rem;    /* 32px */
+  --lv-s-5: 2.5rem;  /* 40px */
+  --lv-s-6: 3rem;    /* 48px */
+
+  /* 🎨 Botones / CTAs */
+  --lv-cta-radius-pill: 999px;
+  --lv-cta-font-weight: 600;
+
+  /* Primario */
+  --lv-cta-primary-from: #2563eb;
+  --lv-cta-primary-to: #1d4ed8;
+  --lv-cta-primary-glow: rgba(37, 99, 235, 0.35);
+
+  /* Outline */
+  --lv-cta-outline-color: #2563eb;
+
+  /* Warning */
+  --lv-cta-warning-from: #fbbf24;
+  --lv-cta-warning-to: #f59e0b;
+  --lv-cta-warning-glow: rgba(245, 158, 11, 0.35);
+
+  /* Hover primario opcional */
+  --lv-cta-hover-from: #1e40af;
+  --lv-cta-hover-to: #1d4ed8;
+
+  /* Z-index */
+  --lv-z-nav: 1000;
+  --lv-z-menu: 1100;
+  --lv-z-toast: 1200;
 }
 
-/* 🧱 Breakpoints móviles y de escritorio */
-$breakpoints: (xs: 600px, // teléfonos
-  sm: 768px, // tablets
-  md: 992px, // laptops
-  lg: 1200px, // escritorios grandes
+/* Tema oscuro opcional */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --lv-bg: #020817;
+    --lv-surface: #020817;
+    --lv-surface-soft: #020817;
+    --lv-text: #e5e7eb;
+    --lv-muted: #9ca3af;
+    --lv-border-subtle: rgba(148, 163, 253, 0.24);
+  }
+}
+
+/* ================================
+   SCSS: MAPAS & BREAKPOINTS
+   ================================ */
+
+$breakpoints: (
+  xs: 600px,
+  // teléfonos
+  sm: 768px,
+  // tablets
+  md: 992px,
+  // laptops
+  lg: 1200px // escritorios grandes
 );
 
-/* 🛠️ Mixin reutilizable para aplicar media queries limpias */
-@mixin respond-to($breakpoint) {
-  $size: map-get($breakpoints, $breakpoint);
+/* Media query helper
+   Uso:
+   @include respond-to(xs) { ... }
+*/
+@mixin respond-to($bp) {
+  $size: map.get($breakpoints, $bp);
 
   @if $size {
     @media (max-width: $size) {
@@ -30,6 +117,200 @@ $breakpoints: (xs: 600px, // teléfonos
   }
 
   @else {
-    @warn "⚠️ El breakpoint '#{$breakpoint}' no está definido en \$breakpoints.";
+    @warn "⚠️ Breakpoint '#{$bp}' no está definido en \$breakpoints.";
   }
+}
+
+/* ================================
+   SCSS: TOKENS EN VARIABLES
+   (para usar en componentes)
+   ================================ */
+
+$lv-font-main: var(--lv-font-main);
+
+$lv-primary: var(--lv-primary);
+$lv-primary-soft: var(--lv-primary-soft);
+$lv-primary-dark: var(--lv-primary-dark);
+$lv-secondary: var(--lv-secondary);
+$lv-accent: var(--lv-accent);
+$lv-title: var(--lv-title);
+$lv-bg: var(--lv-bg);
+$lv-surface: var(--lv-surface);
+$lv-surface-soft: var(--lv-surface-soft);
+$lv-text: var(--lv-text);
+$lv-muted: var(--lv-muted);
+
+/* Gradiente principal reutilizable */
+$lv-cta-gradient: linear-gradient(135deg,
+    var(--lv-cta-primary-from),
+    var(--lv-cta-primary-to));
+
+/* ================================
+   MIXINS UTILITARIOS
+   ================================ */
+
+/* Contenedor centrado */
+@mixin lv-container {
+  max-width: var(--lv-container);
+  margin: 0 auto;
+  padding-inline: 1.5rem;
+}
+
+/* Tarjeta base */
+@mixin lv-card {
+  background-color: var(--lv-surface);
+  border-radius: var(--lv-radius);
+  padding: var(--lv-s-3);
+  box-shadow: var(--lv-shadow-soft);
+  border: 1px solid var(--lv-border-subtle);
+}
+
+/* Título hero potente */
+@mixin lv-hero-title {
+  font-family: $lv-font-main;
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--lv-title);
+}
+
+/* Subtítulo hero */
+@mixin lv-hero-subtitle {
+  font-size: 1.05rem;
+  color: var(--lv-muted);
+  font-weight: 400;
+}
+
+/* =========================================
+   BASE CTA
+   ========================================= */
+
+@mixin lv-cta-base {
+  appearance: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  border-radius: var(--lv-cta-radius, 999px);
+  font-weight: var(--lv-cta-font-weight, 600);
+  letter-spacing: 0.02em;
+  text-decoration: none;
+
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* =========================================
+   TAMAÑOS (usa rem, escalable)
+   ========================================= */
+
+/* Hero / CTA super importante */
+@mixin lv-cta-xl {
+  padding: 1.1rem 3rem;     // ~17.6px x 48px
+  font-size: 1.05rem;       // ~16.8px
+}
+
+/* CTA principal normal */
+@mixin lv-cta-lg {
+  padding: 0.9rem 2.4rem;   // ~14.4px x 38px
+  font-size: 1rem;          // 16px
+}
+
+/* Botón estándar por defecto */
+@mixin lv-cta-md {
+  padding: 0.75rem 2rem;    // ~12px x 32px
+  font-size: 0.94rem;       // ~15px
+}
+
+/* Acciones secundarias / compactas */
+@mixin lv-cta-sm {
+  padding: 0.55rem 1.4rem;  // ~9px x 22px
+  font-size: 0.82rem;       // ~13px
+}
+
+/* =========================================
+   VARIANTES DE COLOR CTA
+   ========================================= */
+
+@mixin lv-cta-primary {
+  @include lv-cta-base;
+  background: linear-gradient(135deg, var(--lv-cta-primary-from), var(--lv-cta-primary-to));
+  color: #fff;
+  box-shadow: 0 10px 25px var(--lv-cta-glow);
+
+  &:hover {
+    background: linear-gradient(135deg, var(--lv-cta-hover-from), var(--lv-cta-hover-to));
+    box-shadow: 0 16px 40px rgba(37, 99, 235, 0.45);
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  }
+}
+
+@mixin lv-cta-outline {
+  @include lv-cta-base; 
+  background: #fff;
+  color: var(--lv-primary);
+  border: 2px solid var(--lv-primary);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: $lv-cta-gradient;
+    opacity: 0;
+    transition: opacity .22s ease;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #fff;
+
+    &::before {
+      opacity: 1;
+    }
+
+    box-shadow: 0 10px 26px rgba(15, 23, 42, .26);
+  }
+}
+
+@mixin lv-cta-warning {
+  @include lv-cta-base;
+  background-color: var(--lv-warning);
+  color: #111827;
+}
+
+/* Texto con degradado sutil */
+@mixin lv-gradient-text($from: var(--lv-primary), $to: var(--lv-accent)) {
+  background: linear-gradient(90deg, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.sell-hero h1 {
+  @include lv-hero-title;
+  @include lv-gradient-text;// si quieres título con degradado 💙💚
+}
+
+.sell-hero .cta-primary {
+  @include lv-cta-primary;
+  @include lv-cta-lg;
+}
+
+.sell-hero .cta-outline {
+  @include lv-cta-outline;
+  @include lv-cta-lg;
 }

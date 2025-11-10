@@ -1,0 +1,4 @@
+<div *ngIf="toast()" class="app-toast"
+     [ngClass]="[toast()!.type, isHiding() ? 'is-hidden' : '']">
+  {{ toast()!.message }}
+</div>

@@ -81,11 +81,11 @@
   }
 }
 
-.nav__link--menu {
+.app-nav__link--menu {
   @include respond-to("xs") {
     width: 100%;
   }
-}
+} 
 
 .footer {
   @include respond-to("xs") {

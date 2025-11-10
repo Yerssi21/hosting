@@ -1,0 +1,46 @@
+/* ================================================
+   🧩 Estilos globales base
+   ================================================ */
+
+* { box-sizing: border-box; }
+html, body { height: 100%; scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--lv-bg);
+  color: var(--lv-text);
+  font-family: var(--lv-font-main);
+  line-height: 1.6;
+}
+
+/* Tipografía básica coherente */
+h1, h2, h3, h4 { margin: 0 0 var(--lv-s-2); color: var(--lv-title); }
+h1 { font-size: clamp(2rem, 3vw + 1rem, 3rem); }
+h2 { font-size: clamp(1.5rem, 2vw + .5rem, 2rem); }
+
+/* Layout helpers */
+.container { width: min(100% - 2rem, var(--lv-container)); margin-inline: auto; }
+.section   { padding: var(--lv-s-6) 0; }
+
+/* UI mínimas reutilizables */
+a, .btn, .card { transition: all .2s ease; }
+
+.btn { padding: .55rem 1rem; border-radius: var(--lv-radius); text-decoration: none; display: inline-block; }
+.btn--primary { background: var(--lv-primary); color: #fff; }
+.btn--primary:hover { filter: brightness(0.95); }
+.btn--ghost { color: var(--lv-text); border: 1px solid rgba(0,0,0,.12); }
+.muted { color: var(--lv-muted); }
+
+.card {
+  background: var(--lv-surface);
+  border-radius: var(--lv-radius);
+  box-shadow: var(--lv-shadow);
+  padding: var(--lv-s-3);
+  border: 1px solid rgba(0,0,0,.06);
+}
+
+/* Accesibilidad */
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--lv-primary) 70%, white);
+  outline-offset: 2px;
+}
