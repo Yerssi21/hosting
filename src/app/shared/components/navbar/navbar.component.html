@@ -15,13 +15,13 @@
         [attr.aria-hidden]="!isMenuOpen"
         [attr.aria-expanded]="isMenuOpen">
       <li class="app-nav__item">
-        <a routerLink="/venta-online" class="app-nav__link" (click)="closeMenu()">Vender en Linea</a>
+        <a routerLink="/venta-online" class="app-nav__link" (click)="closeMenu()">Vender en línea</a>
       </li>
       <li class="app-nav__item">
-        <a routerLink="/haz-tu-pedido" class="app-nav__link" (click)="closeMenu()">Haz el pedido tú mismo</a>
+        <a routerLink="/haz-tu-pedido" class="app-nav__link" (click)="closeMenu()">Haz tu pedido</a>
       </li>
       <li class="app-nav__item">
-        <a routerLink="/soporte-empresarial" class="app-nav__link" (click)="closeMenu()">Obtenga soporte empresarial</a>
+        <a routerLink="/soporte-empresarial" class="app-nav__link" (click)="closeMenu()">Soporte empresarial</a>
       </li>
     </ul>
 
@@ -35,14 +35,17 @@
         <i class="bx bx-user"></i>
         <span class="app-nav__btn--filled-text">Incribirse</span>
       </button>
-      <div class="app-nav__user" routerLink="/area-cliente">
-        <i class="bx bx-user" ></i> <span>Área Cliente</span>
-      </div> 
+      <div class="app-nav__user" routerLink="/area-cliente" (click)="closeMenu()">
+        <i class="bx bx-user"></i> <span>Área Cliente</span>
+      </div>
       <div class="app-nav__lang" aria-label="Idioma actual">ES</div>
     </div>
 
     <!-- Ícono menú móvil -->
-    <button type="button" class="app-nav__menu" (click)="toggleMenu()" aria-label="Abrir menú" [attr.aria-pressed]="isMenuOpen">
+    <button type="button" class="app-nav__menu"
+            (click)="toggleMenu()"
+            aria-label="Abrir menú"
+            [attr.aria-pressed]="isMenuOpen">
       <i class='bx bx-menu-alt-right' aria-hidden="true"></i>
     </button>
   </div>
@@ -99,30 +102,6 @@
     <div class="app-menu-overlay__meta">LUN–VIERNES, 9H–19H</div>
   </div>
 </div>
-<!-- Fin menú móvil a pantalla completa -->
 
-
-<!-- HERO global (usa _layout.scss). Se oculta si hero === 'none' -->
-<section *ngIf="hero() !== 'none'"
-         class="hero"
-         [ngClass]="['hero--' + hero(), anim() ? 'hero--anim-' + anim() : '']">
-  <div class="hero__container container">
-    <h1 class="hero__title">{{ heroText[hero()].title }}</h1>
-    <p class="hero__paragraph">{{ heroText[hero()].subtitle }}</p>
-  </div>
-
-   <!-- ✅ Indicadores del carrusel -->
- 
-  <div class="hero__dots">
-    <button
-      class="hero__dot"
-      *ngFor="let img of pedidoSlides; let i = index"
-      [class.is-active]="i === pedidoActive"
-      (mouseenter)="onPedidoDotHover(i)">
-    </button>
-  </div>
-</section>
-
-<!-- Fin HERO global --> 
-
-
+<!-- Fondo de desenfoque cuando el menú está abierto -->
+<div class="app-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()" aria-hidden="true"></div>  

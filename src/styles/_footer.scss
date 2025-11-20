@@ -1,18 +1,158 @@
-/* Estilos del footer */
+@use './variables' as *;
+
+/* ===== Contenedor general ===== */
 .footer {
-  background-color: #001A49;
-  color: white;
-  padding: 2rem;
-  text-align: center;
-  font-size: 0.9rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--lv-secondary) 92%, #081226) 0%, #020a18 100%);
+  color: #fff;
+  padding: 4rem 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(1200px 220px at 50% -40px, rgba(255,255,255,0.07), transparent 70%);
+    pointer-events: none;
+  }
 }
 
-.footer a {
-  color: white;
-  margin: 0 0.5rem;
-  text-decoration: none;
+/* Grid */
+.footer__container {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2rem;
+  max-width: var(--lv-container);
+  margin: 0 auto 2.4rem;
+
+  @include respond-to(md) { grid-template-columns: 1fr 1fr; text-align: center; }
+  @include respond-to(sm) { grid-template-columns: 1fr; gap: 2rem; }
 }
 
-.footer a:hover {
-  text-decoration: underline;
+/* Col 1: brand + links */
+.footer__brand {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 1rem;
+
+  span { font-weight: 300; color: var(--lv-accent); }
+}
+
+.footer__links {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-direction: column; gap: .45rem;
+
+  a {
+    color: rgba(255,255,255,.86);
+    text-decoration: none;
+    font-size: .95rem;
+    transition: color .2s ease;
+
+    &:hover { color: var(--lv-primary); }
+  }
+
+  @include respond-to(sm) { align-items: center; }
+}
+
+/* Col 2: newsletter (mejor proporción) */
+.footer__newsletter { text-align: center; }
+
+.footer__form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .6rem;
+  justify-content: center;
+  max-width: 520px;      /* 👈 controla el ancho */
+  margin-inline: auto;
+
+  @include respond-to(sm) { grid-template-columns: 1fr; max-width: 420px; }
+}
+
+.footer__input {
+  height: 46px;          /* 👈 mismo alto que el botón */
+  padding: 0 .95rem;
+  border-radius: var(--lv-radius-sm);
+  border: none;
+  font-size: .95rem;
+  outline: none;
+  color: #111;
+  background: #f9fafb;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
+
+  &:focus { box-shadow: 0 0 0 2px var(--lv-primary); }
+}
+
+.footer__submit {
+  @include lv-cta-primary;   /* ya usa tus tokens */
+  @include lv-cta-md;
+  height: 46px;              /* 👈 match input */
+  box-shadow: 0 12px 30px rgba(37,99,235,.35);
+  transition: transform .08s ease;
+
+  &:active { transform: translateY(1px); }
+}
+
+/* Col 3: social */
+.footer__social { text-align: center; @include respond-to(md) { order: -1; } }
+
+.footer__icons {
+  display: flex; justify-content: center; gap: 1rem; margin-top: .6rem;
+
+  .footer__icon {
+    width: 42px; height: 42px; border-radius: 999px;
+    display: grid; place-items: center;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.22);
+    color: #fff; font-size: 1.2rem;
+    transition: transform .15s, background .2s, border-color .2s, box-shadow .2s;
+
+    &:hover {
+      background: var(--lv-primary);
+      border-color: transparent;
+      box-shadow: 0 10px 20px rgba(32,145,249,.35);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+/* Copy + back to top */
+.footer__copy {
+  @include lv-container;
+  margin-top: 2rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid rgba(255,255,255,.14);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 1rem;
+  font-size: .92rem;
+  color: rgba(255,255,255,.75);
+
+  b { color: var(--lv-accent); font-weight: 600; }
+
+  @include respond-to(sm) { grid-template-columns: 1fr; text-align: center; }
+}
+
+.footer__totop {
+  width: 42px; height: 42px; border-radius: 999px;
+  display: grid; place-items: center;
+  border: 1px solid rgba(255,255,255,.25);
+  background: rgba(255,255,255,.08);
+  color: #fff; cursor: pointer;
+  transition: transform .15s, background .2s, border-color .2s;
+
+  i { font-size: 1.3rem; }
+  &:hover { transform: translateY(-2px); background: rgba(255,255,255,.18); border-color: rgba(255,255,255,.4); }
+}
+
+/* Accesibilidad util */
+.sr-only {
+  position: absolute !important; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer * { transition: none !important; animation: none !important; }
 }

@@ -1,0 +1,223 @@
+/* src/app/products-module/area-cliente/client-dashboard.component.scss */
+@use '../../../styles/variables' as *;
+
+.client-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1.8rem;
+  padding: 5.5rem 0 4rem;
+
+  @include respond-to(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sidebar */
+.client-sidebar {
+  background: var(--lv-surface-soft);
+  border-radius: 20px;
+  padding: 1.5rem 1.4rem;
+  box-shadow: var(--lv-shadow-soft);
+  border: 1px solid var(--lv-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+
+.client-sidebar__user {
+  display: flex;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+.client-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: var(--lv-primary-soft);
+  color: var(--lv-primary);
+  display: grid;
+  place-items: center;
+  font-weight: 600;
+}
+
+.client-sidebar__name {
+  font-weight: 600;
+  color: var(--lv-title);
+  margin: 0;
+}
+
+.client-sidebar__email {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--lv-muted);
+}
+
+.client-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.client-tab {
+  border: none;
+  background: transparent;
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-radius: 10px;
+  font-size: 0.94rem;
+  color: var(--lv-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+
+  i { font-size: 1.1rem; }
+
+  &:hover {
+    background: rgba(148, 163, 253, 0.12);
+    color: var(--lv-secondary);
+    transform: translateX(1px);
+  }
+}
+
+.client-tab--active {
+  background: #fff;
+  color: var(--lv-secondary);
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+}
+
+/* Main */
+.client-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.8rem;
+}
+
+.client-main__header h1 {
+  margin: 0 0 0.4rem;
+  font-size: clamp(1.7rem, 1.4rem + 0.8vw, 2rem);
+  color: var(--lv-secondary);
+}
+
+.client-main__subtitle {
+  margin: 0;
+  color: var(--lv-muted);
+  font-size: 0.96rem;
+}
+
+/* Stats */
+.client-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 1rem;
+
+  @include respond-to(md) {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+  }
+
+  @include respond-to(sm) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.client-stat {
+  background: #fff;
+  border-radius: 18px;
+  padding: 1.2rem 1.1rem;
+  box-shadow: var(--lv-shadow-soft);
+  border: 1px solid var(--lv-border-subtle);
+}
+
+.client-stat__label {
+  margin: 0 0 0.15rem;
+  font-size: 0.88rem;
+  color: var(--lv-muted);
+}
+
+.client-stat__value {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--lv-secondary);
+}
+
+.client-stat__hint {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--lv-muted);
+}
+
+/* Tabla simple */
+.client-last-orders__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.9rem;
+
+  h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--lv-secondary);
+  }
+
+  @include respond-to(sm) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.client-table {
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--lv-border-subtle);
+  background: #fff;
+}
+
+.client-table__head,
+.client-table__row {
+  display: grid;
+  grid-template-columns: 2fr 1.4fr 1.4fr 1fr;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+.client-table__head {
+  background: var(--lv-surface-soft);
+  font-weight: 600;
+  color: var(--lv-secondary);
+}
+
+.client-table__row:nth-child(even) {
+  background: rgba(249,250,251,0.7);
+}
+
+/* Badges */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.badge--success {
+  background: rgba(22, 163, 74, 0.12);
+  color: #16a34a;
+}
+
+.badge--warning {
+  background: rgba(245, 158, 11, 0.14);
+  color: #f59e0b;
+}
+
+.badge--muted {
+  background: rgba(148, 163, 184, 0.16);
+  color: #6b7280;
+}

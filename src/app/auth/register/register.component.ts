@@ -1,31 +1,56 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
+import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
-  standalone: true,
   selector: 'app-register',
+  standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private toast: ToastService
+  ) {
     this.registerForm = this.fb.group({
-      nombre: ['', Validators.required],
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      confirmarPassword: ['', Validators.required]
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]],
+      terms: [false, [Validators.requiredTrue]],
     });
   }
 
-  onSubmit(): void {
-    if (this.registerForm.valid) {
-      console.log('Datos del registro:', this.registerForm.value);
-      // Aquí puedes llamar al servicio de registro
+  get fullName() { return this.registerForm.get('fullName')!; }
+  get email() { return this.registerForm.get('email')!; }
+  get password() { return this.registerForm.get('password')!; }
+  get confirmPassword() { return this.registerForm.get('confirmPassword')!; }
+  get terms() { return this.registerForm.get('terms')!; }
+
+  get passwordMismatch(): boolean {
+    const { password, confirmPassword } = this.registerForm.value;
+    return !!password && !!confirmPassword && password !== confirmPassword;
+  }
+
+  onSubmit() {
+    if (this.registerForm.invalid || this.passwordMismatch) {
+      this.registerForm.markAllAsTouched();
+      return;
     }
+
+    this.toast.show({
+      message: 'Cuenta creada con éxito. ¡Bienvenido a Laurrvic Shop!',
+      type: 'success',
+      duration: 3000,
+    });
+
+    this.router.navigate(['/area-cliente']);
   }
 }

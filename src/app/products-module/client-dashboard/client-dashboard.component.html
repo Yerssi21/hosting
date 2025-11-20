@@ -1,0 +1,107 @@
+<section class="client-layout container">
+  <!-- Sidebar -->
+  <aside class="client-sidebar">
+    <div class="client-sidebar__user">
+      <div class="client-avatar">YT</div>
+      <div>
+        <p class="client-sidebar__name">Nombre Apellido</p>
+        <p class="client-sidebar__email">usuario&#64;laurrvic.com</p>
+      </div>
+    </div>
+
+    <nav class="client-sidebar__nav">
+      <button class="client-tab client-tab--active">
+        <i class="bx bx-grid-alt"></i> Resumen
+      </button>
+      <button class="client-tab">
+        <i class="bx bx-receipt"></i> Mis pedidos
+      </button>
+      <button class="client-tab">
+        <i class="bx bx-image-alt"></i> Mis diseños
+      </button>
+      <button class="client-tab">
+        <i class="bx bx-package"></i> Mis productos
+      </button>
+      <button class="client-tab">
+        <i class="bx bx-user-circle"></i> Perfil
+      </button>
+    </nav>
+  </aside>
+
+  <!-- Contenido principal -->
+  <section class="client-main">
+    <header class="client-main__header">
+      <h1>Hola, Yiseth 👋</h1>
+      <p class="client-main__subtitle">
+        Este es tu panel. Cuando conectemos el backend, aquí verás tus pedidos, diseños y facturación en tiempo real.
+      </p>
+    </header>
+
+    <!-- Cards resumen (dummy por ahora) -->
+    <div class="client-stats">
+      <article class="client-stat">
+        <p class="client-stat__label">Pedidos activos</p>
+        <p class="client-stat__value">3</p>
+        <p class="client-stat__hint">En producción o envío</p>
+      </article>
+
+      <article class="client-stat">
+        <p class="client-stat__label">Pedidos entregados</p>
+        <p class="client-stat__value">18</p>
+        <p class="client-stat__hint">Últimos 90 días</p>
+      </article>
+
+      <article class="client-stat">
+        <p class="client-stat__label">Diseños guardados</p>
+        <p class="client-stat__value">12</p>
+        <p class="client-stat__hint">Listos para reutilizar</p>
+      </article>
+
+      <article class="client-stat">
+        <p class="client-stat__label">Productos activos</p>
+        <p class="client-stat__value">7</p>
+        <p class="client-stat__hint">En tu catálogo</p>
+      </article>
+    </div>
+
+    <!-- Una tabla mock de “últimos pedidos” -->
+    <section class="client-last-orders">
+      <div class="client-last-orders__header">
+        <h2>Últimos pedidos</h2>
+        <a routerLink="/haz-tu-pedido" class="cta cta--outline cta--sm">
+          Crear nuevo pedido
+        </a>
+      </div>
+
+      <div class="client-table client-table--compact">
+        <div class="client-table__head">
+          <span>#</span>
+          <span>Fecha</span>
+          <span>Estado</span>
+          <span>Total</span>
+        </div>
+
+        <div class="client-table__row">
+          <span>#2025-0012</span>
+          <span>12 Feb 2025</span>
+          <span class="badge badge--success">Enviado</span>
+          <span>€89,90</span>
+        </div>
+
+        <div class="client-table__row">
+          <span>#2025-0011</span>
+          <span>05 Feb 2025</span>
+          <span class="badge badge--warning">En producción</span>
+          <span>€42,50</span>
+        </div>
+
+        <div class="client-table__row">
+          <span>#2025-0010</span>
+          <span>28 Ene 2025</span>
+          <span class="badge badge--muted">Entregado</span>
+          <span>€19,90</span>
+        </div>
+      </div>
+    </section>
+  </section>
+</section>

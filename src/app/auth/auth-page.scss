@@ -1,0 +1,455 @@
+/* Estos son los estilos del login. */
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, #e0f7ff 0%, #f5f7ff 40%, #eef5ff 100%);
+  padding: 4rem 1.5rem;
+  font-family: var(--lv-font-main, "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif);
+}
+
+/* Wrapper general */
+.auth-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Card 2 columnas */
+.auth-card {
+  width: 100%;
+  max-width: 1040px;
+  display: grid;
+  grid-template-columns: minmax(280px, 1.25fr) minmax(340px, 1fr);
+  gap: 0;
+  background: #ffffff;
+  border-radius: 26px;
+  box-shadow: 0 26px 70px rgba(15, 23, 42, 0.16);
+  overflow: hidden;
+  transform-origin: center;
+  animation: authFadeIn 0.5s ease-out;
+}
+
+/* =========================
+   Columna izquierda (promo)
+   ========================= */
+
+.auth-card__promo {
+  position: relative;
+  padding: 2.5rem 2.4rem 2.2rem;
+  background: linear-gradient(
+      135deg,
+      rgba(88, 28, 135, 0.96),
+      rgba(79, 70, 229, 0.98)
+    ),
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.16), transparent 60%);
+  color: #f9fafb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.auth-card__logo {
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: baseline;
+  opacity: 0.92;
+
+  span:first-child {
+    font-weight: 600;
+  }
+
+  span:last-child {
+    font-weight: 300;
+  }
+}
+
+.auth-card__title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin: 1.2rem 0 0.4rem;
+}
+
+.auth-card__subtitle {
+  font-size: 0.96rem;
+  opacity: 0.9;
+  margin: 0 0 1.5rem;
+}
+
+.auth-card__bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.6rem;
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+
+    &::before {
+      content: "";
+      margin-top: 0.35rem;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.8);
+    }
+  }
+}
+
+.auth-card__hint {
+  font-size: 0.86rem;
+  opacity: 0.88;
+
+  a {
+    color: #fbbf24;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* =========================
+   Columna derecha (form)
+   ========================= */
+
+.auth-card__form {
+  padding: 2.6rem 2.4rem 2.4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-title {
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0 0 0.3rem;
+}
+
+.form-subtitle {
+  font-size: 0.96rem;
+  color: #6b7280;
+  margin: 0 0 1.9rem;
+}
+
+/* Campos */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.3rem;
+}
+
+.form-group label {
+  font-size: 0.86rem;
+  color: #4b5563;
+  font-weight: 500;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.78rem 0.95rem;
+  border-radius: 0.9rem;
+  border: 1px solid #e5e7eb;
+  font-size: 0.96rem;
+  outline: none;
+  background-color: #f9fafb;
+  transition: all 0.22s ease;
+}
+
+.form-group input::placeholder {
+  color: #9ca3af;
+}
+
+.form-group input:focus {
+  background-color: #ffffff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
+}
+
+/* Estados de error */
+
+.form-group.invalid input {
+  border-color: #f97316;
+  box-shadow: 0 0 0 2px rgba(248, 250, 252, 1),
+    0 0 0 4px rgba(249, 115, 22, 0.18);
+}
+
+.error-message {
+  font-size: 0.78rem;
+  color: #ea580c;
+}
+
+/* Botón */
+
+.btn-primary {
+  margin-top: 0.3rem;
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  cursor: pointer;
+  background: linear-gradient(
+    135deg,
+    var(--lv-primary, #4f46e5),
+    #6366f1
+  );
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+}
+
+.btn-primary:disabled {
+  cursor: not-allowed;
+  background: #d1d5db;
+  box-shadow: none;
+}
+
+/* Link alternativo */
+
+.alt-link {
+  margin-top: 1.2rem;
+  font-size: 0.86rem;
+  color: #6b7280;
+
+  a {
+    color: #4f46e5;
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+/* Animación de entrada */
+
+@keyframes authFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================
+   Responsive
+   ========================= */
+
+@media (max-width: 900px) {
+  :host {
+    padding: 3rem 1rem;
+  }
+
+  .auth-card {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+  }
+
+  .auth-card__promo {
+    padding: 1.9rem 1.6rem 1.5rem;
+    border-radius: 24px 24px 0 0;
+  }
+
+  .auth-card__form {
+    padding: 2rem 1.6rem 1.8rem;
+  }
+
+  .form-title {
+    font-size: 1.7rem;
+  }
+}
+/* --- Fin de los estilos del login. --- */
+
+/* Aqui podria ir los estilos del forgot password. */
+
+/* =========================
+   Forgot Password
+   ========================= */
+
+/* Wrapper principal para recuperar contraseña */
+.forgot-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem;
+}
+
+/* Card compacta */
+.forgot-card {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  padding: 2.4rem 2.1rem 2.2rem;
+  border-radius: 22px;
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.18);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: authFadeIn 0.45s ease-out;
+}
+
+/* Título y subtítulo */
+.forgot-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.forgot-subtitle {
+  font-size: 0.92rem;
+  color: #6b7280;
+  margin: 0 0 1.4rem;
+}
+
+/* Grupo de formulario */
+.forgot-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1.1rem;
+}
+
+.forgot-form-group label {
+  font-size: 0.84rem;
+  font-weight: 500;
+  color: #4b5563;
+}
+
+.forgot-form-group input {
+  width: 100%;
+  padding: 0.78rem 0.95rem;
+  border-radius: 0.9rem;
+  border: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+  outline: none;
+  background-color: #f9fafb;
+  transition: all 0.22s ease;
+}
+
+.forgot-form-group input::placeholder {
+  color: #9ca3af;
+}
+
+.forgot-form-group input:focus {
+  background-color: #ffffff;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.16);
+}
+
+/* Estado de error */
+.forgot-form-group.invalid input {
+  border-color: #f97316;
+  box-shadow:
+    0 0 0 2px rgba(248, 250, 252, 1),
+    0 0 0 4px rgba(249, 115, 22, 0.16);
+}
+
+.forgot-error {
+  font-size: 0.78rem;
+  color: #ea580c;
+}
+
+/* Botón enviar enlace */
+.forgot-btn {
+  margin-top: 0.2rem;
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.96rem;
+  cursor: pointer;
+  background: linear-gradient(
+    135deg,
+    var(--lv-primary, #4f46e5),
+    #6366f1
+  );
+  color: #ffffff;
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.35);
+  transition: all 0.25s ease;
+}
+
+.forgot-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 18px 40px rgba(79, 70, 229, 0.4);
+  background: linear-gradient(135deg, #4338ca, #4f46e5);
+}
+
+.forgot-btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 10px 24px rgba(79, 70, 229, 0.35);
+}
+
+.forgot-btn:disabled {
+  cursor: not-allowed;
+  background: #d1d5db;
+  box-shadow: none;
+}
+
+/* Link volver al login */
+.forgot-back {
+  margin-top: 1rem;
+  font-size: 0.84rem;
+  color: #6b7280;
+  text-align: center;
+}
+
+.forgot-back a {
+  color: #4f46e5;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.forgot-back a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .forgot-card {
+    padding: 2rem 1.6rem 2rem;
+    border-radius: 18px;
+  }
+
+  .forgot-title {
+    font-size: 1.45rem;
+  }
+
+  .forgot-subtitle {
+    font-size: 0.9rem;
+  }
+}
+/*--- Fin de los estilos de recuperar contraseña. --- */

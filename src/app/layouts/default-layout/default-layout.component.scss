@@ -1,0 +1,19 @@
+/* El overview va inmediatamente bajo el hero y un pelín “montado” */
+.home-overview-slot {
+  position: relative;
+  z-index: 1;
+  margin-top: -36px; /* Ajusta -20/-44 según tu ola */
+  padding-bottom: 2.5rem;
+}
+
+/* Por si el pseudo-fondo del hero tenía z-index alto */
+.hero::before {
+  z-index: -1; /* ya lo tenías así, lo recordamos */
+}
+
+@media (max-width: 768px) {
+  .home-overview-slot {
+    margin-top: -22px;
+    padding-bottom: 2rem;
+  }
+}

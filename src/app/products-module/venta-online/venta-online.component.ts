@@ -1,8 +1,10 @@
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-venta-online',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './venta-online.component.html',
   styleUrls: ['./venta-online.component.scss'],
 })

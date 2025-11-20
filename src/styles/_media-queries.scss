@@ -1,107 +1,98 @@
 @use "../styles/variables" as *;
 
-.hero {
-  @include respond-to("lg") {
+/* =========================
+   Base mobile-first (sin MQ)
+   ========================= */
+
+/* Si puedes, usa clamp para evitar varios cortes */
+.hero__title     { font-size: clamp(2rem, 1.2rem + 2vw, 3rem); }
+.hero__paragraph { font-size: clamp(1rem, .9rem + .5vw, 1.125rem); }
+
+/* .cta: confía en el sistema global (ya hace full-width <=768px)
+   Solo añade ajustes locales si este hero lo necesita sí o sí. */
+
+
+/* =========================
+   ≤ 1200px (lg)
+   ========================= */
+@include respond-to(lg) {
+  .hero {
     min-height: 500px;
     grid-template-rows: auto 1fr;
   }
 
-  @include respond-to("md") {
+  /* Evita tocar .cta si no cambia algo muy específico
+     (tu sistema ya controla tamaños por modificadores .cta--*) */
+  .cta {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+
+  .about__main {
+    padding-top: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
+  }
+}
+
+/* =========================
+   ≤ 992px (md)
+   ========================= */
+@include respond-to(md) {
+  .hero {
     min-height: 450px;
     padding: 0 20px;
     grid-template-rows: auto 1fr;
   }
 
-  @include respond-to("xs") {
-    min-height: 400px;
-    padding: 0 10px;
-  }
-}
-
-.hero__title {
-  @include respond-to("xs") {
-    font-size: 2rem;
-  }
-}
-
-.hero__paragraph {
-  @include respond-to("xs") {
-    font-size: 1rem;
-  }
-}
-
-.cta {
-  @include respond-to("lg") {
-    font-size: 1rem;
-    padding: 10px 25px;
-  }
-
-  @include respond-to("md") {
+  .cta {
     font-size: 1rem;
     padding: 10px 20px;
   }
 
-  @include respond-to("xs") {
-    width: 80%;
-    font-size: 0.9rem;
-  }
-}
-
-.about {
-  @include respond-to("xs") {
-    padding: 40px 0;
-  }
-}
-
-.about__paragraph {
-  @include respond-to("xs") {
-    font-size: 1rem;
-  }
-}
-
-.about__main {
-  @include respond-to("lg") {
-    padding-top: 50px;
-    grid-template-columns: repeat(auto-fit, minmax(220px, auto));
-  }
-
-  @include respond-to("md") {
+  .about__main {
     grid-template-columns: 1fr;
     gap: 2em;
   }
+
+  .about__icons { width: 200px; }
 }
 
-.about__icons {
-  @include respond-to("md") {
-    width: 200px;
+/* =========================
+   ≤ 600px (xs)
+   ========================= */
+@include respond-to(xs) {
+  .hero {
+    min-height: 400px;
+    padding: 0 10px;
   }
 
-  @include respond-to("xs") {
-    width: 180px;
-  }
-}
+  /* Ya usamos clamp arriba, pero si quieres forzar tamaño en XS: */
+  .hero__title     { font-size: 2rem; }
+  .hero__paragraph { font-size: 1rem; }
 
-.app-nav__link--menu {
-  @include respond-to("xs") {
+  /* Mejor usar el full-width del sistema global:
+     .cta--lg / .cta--xl ya son 100% <=768px.
+     Si este bloque exige otro comportamiento, ajusta aquí: */
+  .cta {
     width: 100%;
+    max-width: 340px; /* coherente con tu sistema global */
+    font-size: .95rem;
   }
-} 
 
-.footer {
-  @include respond-to("xs") {
+  .about       { padding: 40px 0; }
+  .about__icons { width: 180px; }
+
+  .app-nav__link--menu { width: 100%; }
+
+  .footer {
     text-align: center;
     padding: 1rem;
   }
-}
 
-.container {
-  @include respond-to("xs") {
-    padding: 0 1rem;
-  }
-}
+  .container { padding: 0 1rem; }
 
-html, body {
-  @include respond-to("xs") {
-    font-size: 14px;
-  }
+  html, body { font-size: 14px; }
 }
+/* =========================
+   FIN Media Queries específicas de este archivo
+   ========================= */

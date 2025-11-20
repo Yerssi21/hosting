@@ -1,7 +1,7 @@
 @use '../../../styles/variables' as *;
 
 /* ================================================
-   Layout del componente
+   LAYOUT DEL COMPONENTE
    ================================================ */
 
 :host {
@@ -11,7 +11,7 @@
   padding-bottom: 4rem;
 }
 
-/* Contenedor local (usa tu token global) */
+/* Contenedor local (usa token global) */
 .container {
   max-width: var(--lv-container);
   margin: 0 auto;
@@ -53,7 +53,7 @@
 }
 
 /* ================================================
-   BENEFICIOS (4 cards)
+   BENEFICIOS (4 CARDS)
    ================================================ */
 
 .sell-benefits {
@@ -73,7 +73,10 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
 }
 
 .sell-benefits .card i {
@@ -102,7 +105,7 @@
 }
 
 /* ================================================
-   CÓMO FUNCIONA (pasos)
+   CÓMO FUNCIONA (PASOS)
    ================================================ */
 
 .sell-steps {
@@ -134,6 +137,11 @@
   box-shadow: var(--lv-shadow-soft);
   border: 1px solid rgba(229, 231, 235, 0.9);
   text-align: left;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease;
 }
 
 .steps .badge {
@@ -161,6 +169,13 @@
   margin: 0;
   font-size: 0.9rem;
   color: var(--lv-muted);
+}
+
+.steps li:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--lv-shadow-md);
+  border-color: rgba(37, 99, 235, 0.22);
+  background-color: #ffffff;
 }
 
 /* ================================================
@@ -253,7 +268,7 @@
 }
 
 /* ================================================
-   ANIMACIÓN FADE-IN (opcional)
+   ANIMACIÓN FADE-IN (OPCIONAL)
    ================================================ */
 
 .fade-in {
@@ -268,153 +283,7 @@
 }
 
 /* ================================================
-   BOTONES PREMIUM (solo dentro de esta página)
-   ================================================ */
-
-.cta {
-  appearance: none;
-  border: none;
-  outline: none;
-  cursor: pointer;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-
-  padding: 0.9rem 2.4rem;
-  border-radius: var(--lv-cta-radius-pill);
-
-  font-size: 1rem;
-  font-weight: var(--lv-cta-font-weight);
-  letter-spacing: 0.02em;
-  text-decoration: none;
-
-  position: relative;
-  overflow: hidden;
-  transition: all 0.25s ease;
-  user-select: none;
-}
-
-/* Tamaño grande */
-.cta--lg {
-  padding: 1rem 2rem;
-  font-size: 1.0rem;
-  min-width: 220px;
-  border-radius: var(--lv-cta-radius-pill);
-}
-
-@media (max-width: 768px) {
-  .cta--lg {
-    width: 100%;
-    max-width: 320px;
-  }
-}
-
-/* Primario con gradiente + glow */
-.cta--primary {
-  background: linear-gradient(
-    135deg,
-    var(--lv-cta-primary-from),
-    var(--lv-cta-primary-to)
-  );
-  color: #fff;
-  box-shadow: 0 8px 25px var(--lv-cta-primary-glow);
-  border: none;
-  z-index: 0;
-}
-
-.cta--primary::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at 30% 20%,
-    rgba(255, 255, 255, 0.35),
-    transparent 70% 
-  );
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  z-index: 1;
-}
-
-.cta--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 40px rgba(37, 99, 235, 0.5);
-}
-
-.cta--primary:hover::after {
-  opacity: 1;
-}
-
-.cta--primary:active {
-  transform: scale(0.97);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
-}
-
-/* Outline con relleno al hover */
-.cta--outline {
-  color: var(--lv-cta-outline-color);
-  background: transparent;
-  border: 2px solid var(--lv-cta-outline-color);
-  position: relative;
-  overflow: hidden;
-  z-index: 0;
-}
-
-.cta--outline::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    135deg,
-    var(--lv-cta-primary-from),
-    var(--lv-cta-primary-to)
-  );
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.35s ease;
-  z-index: -1;
-}
-
-.cta--outline:hover::before {
-  transform: scaleX(1);
-}
-
-.cta--outline:hover {
-  color: #fff;
-  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.35);
-  transform: translateY(-2px);
-}
-
-.cta--outline:active {
-  transform: scale(0.97);
-}
-
-/* Warning / acento */
-.cta--warning {
-  background: linear-gradient(
-    135deg,
-    var(--lv-cta-warning-from),
-    var(--lv-cta-warning-to)
-  );
-  color: #111827;
-  box-shadow: 0 10px 26px var(--lv-cta-warning-glow);
-  border: none;
-}
-
-.cta--warning:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 38px rgba(245, 158, 11, 0.5);
-}
-
-.cta--warning:active {
-  transform: scale(0.97);
-  box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
-}
-
-/* ================================================
-   RESPONSIVE GRID AJUSTES
+   RESPONSIVE
    ================================================ */
 
 @media (max-width: 1024px) {
@@ -448,22 +317,4 @@
   .sell-hero h1 {
     font-size: 2.1rem;
   }
-} 
-
-.sell-benefits .card,
-.steps li {
-  transform: translateY(0);
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    border-color 0.22s ease,
-    background-color 0.22s ease;
-}
-
-.sell-benefits .card:hover,
-.steps li:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--lv-shadow-md);
-  border-color: rgba(37, 99, 235, 0.22);
-  background-color: #ffffff;
 }

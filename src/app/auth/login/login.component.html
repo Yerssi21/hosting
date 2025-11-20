@@ -1,31 +1,99 @@
 <div class="auth-page">
-  <div class="login-box">
-    <h2>Bienvenido</h2>
-    <p>Inicia sesión para continuar</p>
-
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <div class="form-group" [ngClass]="{'invalid': email.invalid && email.touched}">
-        <label for="email">Correo electrónico</label>
-        <input id="email" type="email" formControlName="email" required />
-        <small *ngIf="email.hasError('required') && email.touched">Este campo es obligatorio</small>
-        <small *ngIf="email.hasError('email') && email.touched">Correo inválido</small>
+  <div class="auth-card">
+    <!-- Columna izquierda: branding / beneficios -->
+    <div class="auth-card__promo">
+      <div class="auth-card__logo">
+        <span>LAURRVIC</span><span>SHOP</span>
       </div>
 
-      <div class="form-group">
-        <label for="password">Contraseña</label>
-        <input id="password" type="password" formControlName="password" required />
-        <small *ngIf="password.hasError('required') && password.touched">Este campo es obligatorio</small>
-        <small *ngIf="password.hasError('minlength') && password.touched">
-          Mínimo 6 caracteres
-        </small>
-      </div>
+      <h2 class="auth-card__title">
+        Área del Cliente Laurrvic
+      </h2>
+      <p class="auth-card__subtitle">
+        Centraliza pedidos, diseños, direcciones y facturación en un solo lugar.
+      </p>
 
-      <button type="submit" [disabled]="loginForm.invalid">Entrar</button>
-    </form>
+      <ul class="auth-card__bullets">
+        <li>Seguimiento en tiempo real de tus pedidos.</li>
+        <li>Biblioteca de diseños siempre disponible.</li>
+        <li>Facturas y datos fiscales organizados.</li>
+        <li>Soporte prioritario para tu marca.</li>
+      </ul>
 
-    <p class="register-text">
-      ¿No tienes cuenta?
-      <a routerLink="/auth/register">Regístrate aquí</a> 
-    </p>
+      <p class="auth-card__hint">
+        ¿Nuevo por aquí?
+        <a routerLink="/auth/register">Crea tu cuenta en minutos</a>
+      </p>
+    </div>
+
+    <!-- Columna derecha: formulario -->
+    <div class="auth-card__form">
+      <h1 class="form-title">Bienvenido</h1>
+      <p class="form-subtitle">
+        Inicia sesión para continuar con tu panel de Laurrvic Shop.
+      </p>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+        <!-- Email -->
+        <div
+          class="form-group"
+          [ngClass]="{ 'invalid': email?.invalid && email?.touched }"
+        >
+          <label for="email">Correo electrónico</label>
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            autocomplete="email"
+            placeholder="tumarca@correo.com"
+            required
+          />
+
+          <small class="error-message" *ngIf="email?.hasError('required') && email?.touched">
+            Por favor, escribe tu correo electrónico.
+          </small>
+          <small class="error-message" *ngIf="email?.hasError('email') && email?.touched">
+            Revisa el formato del correo, algo no cuadra.
+          </small>
+        </div>
+
+        <!-- Password -->
+        <div
+          class="form-group"
+          [ngClass]="{ 'invalid': password?.invalid && password?.touched }"
+        >
+          <label for="password">Contraseña</label>
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            autocomplete="current-password"
+            placeholder="Tu contraseña segura"
+            required
+          />
+
+          <small class="error-message" *ngIf="password?.hasError('required') && password?.touched">
+            La contraseña es obligatoria.
+          </small>
+          <small class="error-message" *ngIf="password?.hasError('minlength') && password?.touched">
+            Debe tener al menos 6 caracteres.
+          </small>
+        </div>
+
+        <!-- Botón -->
+        <button
+          type="submit"
+          class="btn-primary"
+          [disabled]="loginForm.invalid"
+        >
+          Entrar
+        </button>
+      </form>
+
+      <p class="alt-link">
+        ¿Aún no tienes cuenta?
+        <a routerLink="/auth/register">Regístrate aquí</a>
+      </p>
+    </div>
   </div>
 </div>

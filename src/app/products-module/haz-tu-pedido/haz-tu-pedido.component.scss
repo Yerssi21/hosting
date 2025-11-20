@@ -1,5 +1,7 @@
+@use '../../../styles/variables' as *;
+
 /* ===============================
-   HERO PRINCIPAL
+   HERO PRINCIPAL "HAZ TU PEDIDO"
    =============================== */
 
 .pedido-page {
@@ -9,24 +11,26 @@
   justify-content: center;
   align-items: flex-start;
 
-  /* banda suave detrás de la tarjeta, pero el resto blanco */
+  /* banda suave reutilizando tonos tipo Laurrvic */
   background: linear-gradient(
     to bottom,
-    #eef1ff 0%,
-    #f5f6ff 40%,
+    var(--lv-purple-soft, #eef1ff) 0%,
+    var(--lv-purple-soft-alt, #f5f6ff) 40%,
     #ffffff 100%
   );
 
   &__container {
     max-width: 800px;
     width: 100%;
+    margin: 0 auto;
     text-align: center;
     background: #ffffff;
     padding: 3rem;
     border-radius: 1.5rem;
+
+    /* sombra ligada al tono morado de marca */
     box-shadow: 0 14px 40px rgba(108, 99, 255, 0.22);
     transition: all 0.35s ease;
-    margin: 0 auto;
 
     &:hover {
       transform: translateY(-4px);
@@ -35,15 +39,17 @@
   }
 
   &__title {
+    font-family: var(--lv-font-main);
     font-size: clamp(2.2rem, 1.8rem + 1.2vw, 2.6rem);
     font-weight: 700;
-    color: #2f2a7a;
+    letter-spacing: -0.02em;
+    color: var(--lv-purple-dark, #2f2a7a);
     margin-bottom: 1rem;
   }
 
   &__subtitle {
     font-size: 1.02rem;
-    color: #555;
+    color: var(--lv-muted);
     margin-bottom: 2rem;
     line-height: 1.6;
   }
@@ -54,45 +60,111 @@
     gap: 1rem;
     flex-wrap: wrap;
     margin-bottom: 1.2rem;
-
-    .btn {
-      padding: 0.9rem 2.1rem;
-      font-size: 0.98rem;
-      border-radius: 999px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: all 0.25s ease-in-out;
-
-      &.btn-primary {
-        background: linear-gradient(135deg, #7b6cff, #5f5af6);
-        color: #ffffff;
-        border: none;
-        box-shadow: 0 10px 25px rgba(123, 108, 255, 0.35);
-
-        &:hover {
-          background: linear-gradient(135deg, #6a5ef5, #4e46e5);
-          box-shadow: 0 14px 32px rgba(108, 99, 255, 0.45);
-          transform: translateY(-2px);
-        }
-      }
-
-      &.btn-outline {
-        background: transparent;
-        border: 2px solid #7b6cff;
-        color: #6c63ff;
-
-        &:hover {
-          background: #6c63ff;
-          color: #ffffff;
-          box-shadow: 0 10px 28px rgba(108, 99, 255, 0.3);
-          transform: translateY(-2px);
-        }
-      }
-    }
   }
 }
 
-/* Puntos clave bajo los botones */
+/* ===============================
+   BOTONES (usando sistema global)
+   =============================== */
+
+/* Base local para .btn dentro de esta página */
+.pedido-page .btn {
+  @include lv-cta-base;
+  @include lv-cta-md;
+}
+
+/* Primario morado degradado */
+.pedido-page .btn-primary {
+  background: linear-gradient(
+    135deg,
+    var(--lv-purple-from, #7b6cff),
+    var(--lv-purple-to, #5f5af6)
+  );
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 25px rgba(123, 108, 255, 0.35);
+  position: relative;
+  z-index: 0;
+  transition: all 0.25s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 20% 0%,
+      rgba(255, 255, 255, 0.22),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(108, 99, 255, 0.45);
+    background: linear-gradient(
+      135deg,
+      var(--lv-purple-hover-from, #6a5ef5),
+      var(--lv-purple-hover-to, #4e46e5)
+    );
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 6px 18px rgba(108, 99, 255, 0.35);
+  }
+}
+
+/* Outline morado */
+.pedido-page .btn-outline {
+  background: transparent;
+  color: var(--lv-purple, #6c63ff);
+  border: 2px solid var(--lv-purple, #7b6cff);
+  box-shadow: none;
+  position: relative;
+  z-index: 0;
+  transition: all 0.25s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--lv-purple-from, #7b6cff),
+      var(--lv-purple-to, #5f5af6)
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(108, 99, 255, 0.3);
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* ===============================
+   PUNTOS CLAVE
+   =============================== */
+
 .pedido-page__highlights {
   display: flex;
   flex-wrap: wrap;
@@ -113,7 +185,7 @@
 
 .pedido-page__highlights li::before {
   content: "•";
-  color: #6c63ff;
+  color: var(--lv-purple, #6c63ff);
   font-size: 1rem;
 }
 
@@ -122,7 +194,7 @@
    =============================== */
 
 .pedido-flow {
-  background: #ffffff; /* uniforme con el resto */
+  background: #ffffff;
   padding: 3.5rem 1rem 5rem;
 
   &__container {
@@ -134,7 +206,7 @@
     text-align: center;
     font-size: clamp(1.9rem, 1.5rem + 1vw, 2.2rem);
     font-weight: 700;
-    color: #2f2a7a;
+    color: var(--lv-purple-dark, #2f2a7a);
     margin-bottom: 2.5rem;
     position: relative;
 
@@ -146,7 +218,11 @@
       transform: translateX(-50%);
       width: 80px;
       height: 4px;
-      background: linear-gradient(90deg, #7b6cff, #9b8cff);
+      background: linear-gradient(
+        90deg,
+        var(--lv-purple-from, #7b6cff),
+        var(--lv-purple-to, #9b8cff)
+      );
       border-radius: 2px;
     }
   }
@@ -176,7 +252,11 @@
     width: 28px;
     height: 28px;
     border-radius: 999px;
-    background: linear-gradient(135deg, #7b6cff, #5f5af6);
+    background: linear-gradient(
+      135deg,
+      var(--lv-purple-from, #7b6cff),
+      var(--lv-purple-to, #5f5af6)
+    );
     color: #ffffff;
     font-size: 0.8rem;
     font-weight: 600;
@@ -203,14 +283,14 @@
   }
 }
 
-/* Cuando el observer la marque visible */
+/* Visibles con observer */
 .pedido-step.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* ===============================
-   ANIMACIÓN + RESPONSIVE
+   RESPONSIVE
    =============================== */
 
 @media (max-width: 900px) {
@@ -237,5 +317,3 @@
     }
   }
 }
-
-

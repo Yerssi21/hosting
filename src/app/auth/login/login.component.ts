@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -11,42 +11,59 @@ import { ToastService } from '../../shared/services/toast.service';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  // ✅ FormGroup tipado con valores
+  loginForm: FormGroup = inject(FormBuilder).group({
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+  });
 
-  constructor(
-    private fb: FormBuilder,
-    private router: Router,
-    private toast: ToastService
-  ) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
-    });
-  }
+  // ✅ Inyección con `inject()` (Angular moderno)
+  private router = inject(Router);
+  private toast = inject(ToastService);
 
-  onSubmit() {
-    if (this.loginForm.invalid) return;
-    // Simular éxito
+  // ==============================
+  // 🧠 Lógica principal
+  // ==============================
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+      this.toast.show({
+        message: 'Por favor, completa correctamente los campos.',
+        type: 'warning',
+        duration: 2500,
+      });
+      return;
+    }
+
+    const { email } = this.loginForm.value;
+
+    // Simulación de login
     this.toast.show({
-      message: 'Bienvenido de nuevo!',
+      message: `¡Bienvenido de nuevo, ${email}!`,
       type: 'success',
-      duration: 3000
+      duration: 3000,
     });
-    // Simular login y redirección
-    this.router.navigate(['/home']);
+
+    // Pequeño delay visual antes de redirigir
+    setTimeout(() => {
+      this.router.navigate(['/home']);
+    }, 800);
   }
 
+  // ==============================
+  // 🧩 Getters para template
+  // ==============================
   get email() {
-    return this.loginForm.get('email')!;
+    return this.loginForm.get('email');
   }
 
   get password() {
-    return this.loginForm.get('password')!;
+    return this.loginForm.get('password');
   }
 }

@@ -1,13 +1,30 @@
 <header>
-  <app-navbar-component></app-navbar-component>
+  <!-- 🌐 NAVBAR fijo arriba en todas las páginas -->
+  <app-navbar></app-navbar>
+
+  <!-- 🎬 HERO global
+       - Decide solo (por data de rutas) cuál hero mostrar:
+         home / pedido / venta / soporte / cliente / none
+       - Si la ruta tiene hero: 'none', este componente no pinta nada -->
+  <app-hero></app-hero>
+
+  <!-- 📌 Overview SOLO en el HOME, justo debajo del hero -->
+  <section *ngIf="isHome()" class="home-overview-slot">
+    <app-home-overview></app-home-overview>
+  </section>
 </header>
 
+<!-- 🔔 Toasts / notificaciones globales -->
 <app-toast></app-toast>
 
 <main>
+  <!-- 🧭 Aquí se inyectan las páginas (home, venta, pedido, etc.) -->
   <router-outlet></router-outlet>
 </main>
 
-<footer class="footer">
-  <app-footer-component></app-footer-component>
+<!-- 🔻 Footer global de la app
+     El componente ya tiene su propio <footer class="footer"> por dentro,
+     así que puedes dejarlo solo o así si quieres semántica extra -->
+<footer>
+  <app-footer></app-footer>
 </footer>

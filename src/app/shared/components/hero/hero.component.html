@@ -1,0 +1,36 @@
+<!-- Solo mostramos hero si la ruta lo pide -->
+<section *ngIf="hero() !== 'none'"
+         class="hero"
+         [ngClass]="['hero--' + hero(), anim() ? 'hero--anim-' + anim() : '']">
+
+  <div class="hero__container container">
+    <h1 class="hero__title">{{ heroText[hero()].title }}</h1>
+    <p class="hero__paragraph">{{ heroText[hero()].subtitle }}</p>
+
+    <!-- CTAs solo en home -->
+    <div *ngIf="hero() === 'home'" class="hero__cta">
+      <div class="hero__cta-group">
+        <a
+          routerLink="/haz-tu-pedido"
+          class="hero__cta-primary">
+          EMPIEZA GRATIS
+        </a>
+
+        <a href="/home#como-funciona" class="hero__cta-outline">
+          VER CÓMO FUNCIONA
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dots solo en haz tu pedido -->
+  <div *ngIf="hero() === 'pedido'" class="hero__dots">
+    <button
+      class="hero__dot"
+      *ngFor="let img of pedidoSlides; let i = index"
+      [class.is-active]="i === pedidoActive"
+      (mouseenter)="onPedidoDotHover(i)">
+    </button>
+  </div>
+</section>
+<!-- FIN HERO COMPONENT -->

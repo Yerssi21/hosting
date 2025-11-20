@@ -1,0 +1,301 @@
+@use '../variables' as *;
+
+/* ──────────────────────────────────────────────────────────────────────────────
+  NAVBAR + OVERLAY MOBILE
+  Proyecto: Laurrvic Shop
+────────────────────────────────────────────────────────────────────────────── */
+
+/* =============== */
+/* Barra superior  */
+/* =============== */
+.app-nav {
+  /* variable para que el resto (ej. hero) pueda medir la altura real del nav */
+  --nav-height: 80px;
+
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nav-height);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  z-index: var(--lv-z-nav);
+  color: #fff;
+
+  /* sobre hero: vidrio oscuro */
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: background-color .5s ease, color .5s ease;
+}
+
+.app-nav.scrolled {
+  background-color: var(--lv-surface-soft);
+  color: var(--lv-text);
+}
+
+.app-nav__container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* =============== */
+/* Branding / logo */
+/* =============== */
+.app-nav__logo { display: flex; align-items: center; }
+
+.app-nav__title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+
+  span { font-weight: 300; }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    &:hover { color: var(--lv-accent); }
+  }
+}
+
+/* ========================= */
+/* Links principales (desk)  */
+/* ========================= */
+.app-nav__links {
+  display: flex;
+  gap: 2rem;
+}
+
+.app-nav__item { list-style: none; }
+
+.app-nav__link {
+  color: inherit;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color .3s;
+
+  &:hover { color: var(--lv-primary); }
+}
+
+/* =================== */
+/* Acciones derechas   */
+/* =================== */
+.app-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Usa CTAs globales – no redefinimos estilos aquí */
+.app-nav__btn {
+  @extend .cta;
+  @extend .cta--md;
+}
+
+/* outline: azul de marca */
+.app-nav__btn--outline {
+  @extend .cta--outline;
+}
+
+/* filled: acento verde (si quieres mantenerlo) */
+.app-nav__btn--filled {
+  background: var(--lv-accent);
+  color: #0f172a;
+  border: none;
+  &:hover { filter: brightness(0.95); }
+}
+
+/* usuario / idioma */
+.app-nav__user,
+.app-nav__lang {
+  color: inherit;
+  font-size: .95rem;
+  cursor: pointer;
+  transition: color .3s;
+  &:hover { color: var(--lv-warning); }
+}
+
+/* =============== */
+/* Botón mobile    */
+/* =============== */
+.app-nav__menu {
+  display: none; /* se muestra en media */
+  place-items: center;
+  width: 42px; height: 42px; border-radius: 10px;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.3);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0,0,0,.3);
+  cursor: pointer; transition: all .3s ease; z-index: calc(var(--lv-z-nav) + 200);
+
+  i {
+    font-size: 1.6rem; color: #fff; transition: transform .25s, color .3s;
+  }
+
+  &:hover {
+    background: rgba(255,255,255,.2); transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(32,145,249,.5);
+    i { color: var(--lv-primary); transform: rotate(90deg); }
+  }
+}
+
+.app-nav.menu-open .app-nav__menu {
+  background: var(--lv-primary); border-color: transparent;
+  box-shadow: 0 6px 16px rgba(32,145,249,.4);
+  i { color: #fff; transform: rotate(90deg); }
+}
+
+.app-nav.scrolled .app-nav__menu {
+  background: rgba(0,26,73,.85);
+  border-color: rgba(255,255,255,.1);
+  i { color: #fff; }
+}
+
+/* =============== */
+/* Overlay móvil   */
+/* =============== */
+
+.app-menu-overlay {
+  position: fixed; inset: 0;
+  z-index: calc(var(--lv-z-nav) + 100);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: calc(var(--nav-height) + 16px) 16px 24px; /* deja espacio al nav fijo */
+  background: rgba(0,0,0,.4);
+  backdrop-filter: blur(6px);
+  animation: overlayFade .25s ease;
+}
+
+@keyframes overlayFade { from { opacity: 0; } to { opacity: 1; } }
+
+.app-menu-overlay__panel {
+  width: min(920px, 100%);
+  background: #fff; color: var(--lv-text);
+  border-radius: 18px;
+  border: 1px solid rgba(0,0,0,.06);
+  box-shadow: 0 20px 50px rgba(0,0,0,.25);
+  overflow: hidden;
+  transform: translateY(-8px);
+  animation: panelIn .3s ease forwards;
+
+  /* layout interno del panel */
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+
+  /* scroll interno con límites seguros */
+  max-height: calc(100vh - (var(--nav-height) + 60px));
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0,0,0,.2) transparent;
+
+  /* tipografía consistente */
+  font-family: var(--lv-font-main);
+  letter-spacing: 0.01em;
+}
+
+@keyframes panelIn { to { transform: translateY(0); } }
+
+.app-menu-overlay__close{
+  position: absolute; right: 22px; top: calc(var(--nav-height) + 22px);
+  width: 40px; height: 40px; border-radius: 999px;
+  display: grid; place-items: center;
+  background: #fff; border: 1px solid rgba(0,0,0,.1);
+  cursor: pointer; transition: transform .15s, box-shadow .2s;
+  i { font-size: 1.6rem; }
+  &:hover { transform: rotate(90deg); box-shadow: 0 6px 16px rgba(0,0,0,.15); }
+}
+
+.app-menu-overlay__title {
+  text-align: center; font-weight: 600; font-size: .92rem;
+  letter-spacing: .06em; opacity: .7;
+  padding: 22px 16px 16px;
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+.app-menu-overlay__list {
+  list-style: none; margin: 0;
+  padding: 8px 16px;
+  max-width: 540px; width: 100%; margin-inline: auto;
+}
+
+.app-menu-overlay__item { border-bottom: 1px solid rgba(2,6,23,.06); }
+
+.app-menu-overlay__link {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 18px 6px;
+  font-size: 1.05rem; color: #123; text-decoration: none;
+  transition: color .2s, transform .15s;
+  i { font-size: 1.3rem; opacity: .65; }
+
+  &:hover {
+    color: var(--lv-primary); transform: translateX(2px);
+    text-decoration: none;
+    background: linear-gradient(to right, color-mix(in srgb, var(--lv-primary) 6%, transparent), transparent);
+    border-radius: 8px;
+  }
+}
+
+/* CTAs dentro del panel — usa tu sistema global */
+.app-menu-overlay__ctas {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 18px 16px 12px;
+}
+
+.cta {
+  /* las utilidades globales ya traen tamaños, aquí solo igualamos ancho */
+  width: 100%;
+  max-width: 340px;
+}
+
+.app-menu-overlay__meta {
+  text-align: center; font-size: .78rem; letter-spacing: .08em; opacity: .6;
+  padding: 4px 0 18px;
+}
+
+/* Mostrar overlay solo en mobile/tablet (tu *ngIf ya controla visibilidad) */
+@media (max-width: 1024px) {
+  .app-menu-overlay { display: flex; }
+}
+
+/* =============== */
+/* Responsivo Nav  */
+/* =============== */
+@media (max-width: 1024px) {
+  .app-nav { padding: 0 20px; }
+  .app-nav__actions { gap: 10px; }
+  .app-nav__btn { display: none; }      /* oculta botones grandes en tablet */
+  .app-nav__links { display: none; }    /* links desktop fuera en tablet */
+  .app-nav__menu { display: grid; }     /* muestra hamburguesa */
+}
+
+@media (max-width: 800px) {
+  .app-nav { padding: 0 15px; }
+  .app-nav__menu { display: grid; }
+  .app-nav__links { display: none; }
+}
+
+@media (max-width: 600px) {
+  .app-nav { height: 70px; }
+  .app-nav { --nav-height: 70px; } /* actualiza la custom prop para el resto */
+  .app-nav__actions { gap: 5px; }
+  .app-nav__btn { font-size: .9rem; padding: 8px 12px; }
+}
+
+/* Bloqueo de scroll cuando el overlay está abierto */
+.no-scroll { overflow: hidden; }
+
+/* Accesibilidad: focus ring visible en el panel */
+.app-menu-overlay__panel a:focus-visible,
+.app-menu-overlay__panel button:focus-visible {
+  outline: 2px solid var(--lv-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* =========================
+   Fin NAVBAR + OVERLAY MOBILE
+   ========================= */
+

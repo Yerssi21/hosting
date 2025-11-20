@@ -1,17 +1,19 @@
+@use './variables' as *;
+
 /* =========================
    HERO BASE
    ========================= */
 
 .hero {
+  min-height: clamp(460px, 100vh, 760px);
   position: relative;
   z-index: 0;
   width: 100%;
-  height: 100vh;
-  min-height: 600px;
-  max-height: 800px;
   display: grid;
-  grid-template-rows: 100px 1fr;
+  grid-template-rows: var(--nav-height, 80px) 1fr;
   color: #fff;
+  content-visibility: auto;
+  contain: paint;
 }
 
 .hero::before {
@@ -20,124 +22,51 @@
   inset: 0;
   background:
     linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
-    url('/images/ropa.avif') center / cover no-repeat;
+    var(--hero-image, url('/images/ropa.avif'));
+  background-size: cover;
+  background-position: center 22%;
   clip-path: polygon(0 0, 100% 0, 100% 80%, 50% 95%, 0 80%);
   z-index: -1;
-  transition: background-image 0.4s ease-in-out, transform 0.4s ease-in-out;
+  transition: background-position .35s ease-in-out, transform .35s ease-in-out;
 }
 
 /* Contenido centrado */
 .hero__container {
+  padding: calc(var(--nav-height, 80px) + 16px + env(safe-area-inset-top))
+           1rem
+           0;
   display: grid;
   place-items: center;
   text-align: center;
-  padding: 0 1rem;
 }
 
 .hero__title {
-  font-size: clamp(2rem, 3vw + 1rem, 3rem);
-  margin: 0 0 .5rem;
+  @include lv-hero-title;
+  @include lv-gradient-text(var(--lv-primary), var(--lv-accent));
+  margin-bottom: .5rem;
 }
 
 .hero__paragraph {
-  margin: 0;
+  @include lv-hero-subtitle;
   opacity: .9;
+  margin: 0;
 }
 
 /* =========================
-   VARIANTES POR PANTALLA
+   VARIANTES
    ========================= */
 
-.hero.hero--home::before {
-  background-image:
-    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
-    url('/images/home-uno.jpg');
-}
+.hero.hero--home    { --hero-image: url('/images/home-uno.jpg'); }
+.hero.hero--venta   { --hero-image: url('/images/venta-online.jpg'); }
+.hero.hero--soporte { --hero-image: url('/images/soporte.jpg'); }
+.hero.hero--cliente { --hero-image: url('/images/cliente.jpg'); }
 
-.hero.hero--venta::before {
-  background-image:
-    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
-    url('/images/venta-online.jpg');
-}
+/* =========================
+   HERO "HAZ TU PEDIDO" (carrusel)
+   ========================= */
 
-.hero.hero--soporte::before {
-  background-image:
-    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
-    url('/images/soporte.jpg');
-}
-
-.hero.hero--cliente::before {
-  background-image:
-    linear-gradient(135deg, rgba(0,0,0,.50), rgba(0,0,0,.70)),
-    url('/images/cliente.jpg');
-}
-
-/* Hero oculto si alguna ruta no lo usa */
-.hero.hero--hidden {
-  display: none;
-}
-
-/* Quitar ola si alguna ruta lo pide */
-.hero.hero--no-clip::before {
-  clip-path: none;
-}
-
-/* Animaciones opcionales (si quieres usarlas en otras rutas) */
-.hero.hero--anim-zoom::before     { animation: zoomBg 25s infinite ease-in-out; }
-.hero.hero--anim-float::before    { animation: floatBg 30s infinite ease-in-out; }
-.hero.hero--anim-fadezoom::before { animation: fadeZoomFloat 40s infinite ease-in-out; }
-
-@keyframes zoomBg {
-  0%,100% { transform: scale(1); }
-  50%     { transform: scale(1.05); }
-}
-
-@keyframes floatBg {
-  0%,100% { background-position: center; }
-  50%     { background-position: center 40%; }
-}
-
-@keyframes fadeZoomFloat {
-  0%,100% { transform: scale(1); background-position:center; }
-  50%     { transform: scale(1.05); background-position:center top; }
-}
-
-/* CTA de ejemplo (si lo usas) */
-.cta {
-  display: inline-block;
-  background: #2091F9;
-  color: #fff;
-  text-decoration: none;
-  padding: 12px 28px;
-  border-radius: 32px;
-  transition: background-color .3s ease;
-  font-size: 1rem;
-  text-align: center;
-}
-.cta:hover { background:#1769aa; }
-
-/* Responsive */
-@media (max-width: 768px) {
-  .hero {
-    grid-template-rows: 80px 1fr;
-    min-height: 520px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero::before {
-    animation: none !important;
-  }
-}
-
-/* =========================================
-   HERO "HAZ TU PEDIDO" - SOLO AQUÍ
-   ========================================= */
-
-/* Usamos una variable para la imagen actual.
-   Si nadie la toca, muestra la primera. */
 .hero.hero--pedido::before {
-  clip-path: none; /* sin ola */
+  clip-path: none;
   background:
     linear-gradient(135deg, rgba(0,0,0,.45), rgba(0,0,0,.70)),
     var(--pedido-current, url('/images/pedido-1.jpg'));
@@ -145,18 +74,19 @@
   background-position: center;
 }
 
-/* Dots (solo estilo visual, la lógica la manejamos en TS) */
+/* dots del carrusel */
 .hero__dots {
   position: absolute;
   bottom: 26px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 8px;
+  gap: 10px;
   z-index: 5;
 }
 
 .hero__dot {
+  position: relative;
   width: 10px;
   height: 10px;
   border-radius: 999px;
@@ -165,17 +95,105 @@
   opacity: 0.5;
   cursor: pointer;
   transition: all 0.18s ease;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -8px; /* más zona clicable */
+  }
 }
 
-/* Punto activo */
 .hero__dot.is-active {
   background: #fff;
   opacity: 1;
   transform: scale(1.2);
 }
 
-/* Hover: que se sienta clicable */
 .hero__dot:hover {
   opacity: 1;
   transform: scale(1.25);
+}
+
+/* =========================
+   CTAs ESPECÍFICOS DEL HERO
+   ========================= */
+
+.hero__cta-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.hero__cta-primary {
+  @include lv-cta-primary;
+  @include lv-cta-xl;
+}
+
+.hero__cta-outline {
+  --lv-cta-outline-color: rgba(255,255,255,0.9);
+  @include lv-cta-outline;
+  @include lv-cta-lg;
+  color: #ffffff;
+}
+
+.hero__cta-group :is(a, button):focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+  box-shadow: 0 0 0 3px rgba(255,255,255,.25);
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+/* Tablets */
+@include respond-to(md) {
+  .hero {
+    min-height: 520px;
+  }
+  .hero::before {
+    background-position: center 26%;
+  }
+}
+
+/* Móviles */
+@include respond-to(sm) {
+  .hero {
+    min-height: 480px;
+  }
+  .hero::before {
+    background-position: center 30%;
+  }
+}
+
+/* Móviles pequeños */
+@include respond-to(xs) {
+  .hero {
+    min-height: 440px;
+  }
+
+  .hero::before {
+    background-position: center 34%;
+    clip-path: polygon(0 0, 100% 0, 100% 86%, 50% 97%, 0 86%);
+  }
+
+  .hero__title {
+    font-size: clamp(1.6rem, 4.2vw + .6rem, 1.9rem);
+    line-height: 1.15;
+  }
+
+  .hero__paragraph {
+    font-size: .95rem;
+  }
+
+  .hero__cta-group {
+    gap: .7rem;
+
+    :is(a,button) {
+      width: 100%;
+      max-width: 320px;
+    }
+  }
 }

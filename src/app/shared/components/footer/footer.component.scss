@@ -1,0 +1,4 @@
+ @use '../../../../styles/variables' as *;
+
+/* el componente no necesita más estilos ahora mismo;   todo el look & feel vive en styles/_footer.scss */
+:host { display: block; }

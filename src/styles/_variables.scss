@@ -1,13 +1,16 @@
-/* ================================================
-   🌐 TOKENS GLOBALES (CSS Variables + SCSS)
-   ÚNICA FUENTE DE VERDAD PARA COLORES, TIPOS, ETC.
-   ================================================ */
-
 @use "sass:map";
 
-/* ================================
-   CSS VARIABLES (runtime / theming)
-   ================================ */
+/* ==========================================================
+   _variables.scss
+   - ÚNICA fuente de verdad (CSS custom props + mixins SCSS)
+   - Paletas (azul + morado), tipografías, breakpoints
+   - Mixins utilitarios + SISTEMA DE CTAs
+   ========================================================== */
+
+/* ================================================
+   SCSS CUSTOM PROPERTIES: :root (variables globales)
+   ================================================ */
+
 :root {
   /* Layout */
   --lv-container: 1200px;
@@ -26,13 +29,23 @@
   --lv-muted: #6b7280;
   --lv-border-subtle: rgba(148, 163, 253, 0.18);
 
-  /* Marca */
+  /* Marca principal */
   --lv-primary: #2091F9;
   --lv-primary-soft: #e0f2ff;
   --lv-primary-dark: #1d4ed8;
   --lv-secondary: #001A49;
   --lv-accent: #A2C08C;
   --lv-title: #001A49;
+
+  /* Paleta morada (Haz tu pedido + auth) */
+  --lv-purple: #6c63ff;
+  --lv-purple-dark: #2f2a7a;
+  --lv-purple-soft: #eef1ff;
+  --lv-purple-soft-alt: #f5f6ff;
+  --lv-purple-from: #7b6cff;
+  --lv-purple-to: #5f5af6;
+  --lv-purple-shadow-soft: 0 14px 40px rgba(108, 99, 255, 0.22);
+  --lv-purple-shadow-strong: 0 18px 50px rgba(108, 99, 255, 0.28);
 
   /* Estados */
   --lv-success: #22c55e;
@@ -43,31 +56,31 @@
   --lv-font-main: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
 
   /* Espaciado */
-  --lv-s-1: .5rem;   /* 8px */
-  --lv-s-2: 1rem;    /* 16px */
-  --lv-s-3: 1.5rem;  /* 24px */
-  --lv-s-4: 2rem;    /* 32px */
-  --lv-s-5: 2.5rem;  /* 40px */
-  --lv-s-6: 3rem;    /* 48px */
+  --lv-s-1: .5rem;
+  --lv-s-2: 1rem;
+  --lv-s-3: 1.5rem;
+  --lv-s-4: 2rem;
+  --lv-s-5: 2.5rem;
+  --lv-s-6: 3rem;
 
-  /* 🎨 Botones / CTAs */
+  /* CTAs */
   --lv-cta-radius-pill: 999px;
   --lv-cta-font-weight: 600;
 
-  /* Primario */
+  /* CTA Primario (azul) */
   --lv-cta-primary-from: #2563eb;
   --lv-cta-primary-to: #1d4ed8;
   --lv-cta-primary-glow: rgba(37, 99, 235, 0.35);
 
-  /* Outline */
+  /* CTA Outline */
   --lv-cta-outline-color: #2563eb;
 
-  /* Warning */
+  /* CTA Warning */
   --lv-cta-warning-from: #fbbf24;
   --lv-cta-warning-to: #f59e0b;
   --lv-cta-warning-glow: rgba(245, 158, 11, 0.35);
 
-  /* Hover primario opcional */
+  /* Hover primario */
   --lv-cta-hover-from: #1e40af;
   --lv-cta-hover-to: #1d4ed8;
 
@@ -89,24 +102,17 @@
   }
 }
 
-/* ================================
-   SCSS: MAPAS & BREAKPOINTS
-   ================================ */
+/* ================================================
+   SCSS: BREAKPOINTS + MIXIN respond-to
+   ================================================ */
 
 $breakpoints: (
   xs: 600px,
-  // teléfonos
   sm: 768px,
-  // tablets
   md: 992px,
-  // laptops
-  lg: 1200px // escritorios grandes
+  lg: 1200px
 );
 
-/* Media query helper
-   Uso:
-   @include respond-to(xs) { ... }
-*/
 @mixin respond-to($bp) {
   $size: map.get($breakpoints, $bp);
 
@@ -114,17 +120,33 @@ $breakpoints: (
     @media (max-width: $size) {
       @content;
     }
-  }
-
-  @else {
+  } @else {
     @warn "⚠️ Breakpoint '#{$bp}' no está definido en \$breakpoints.";
   }
 }
 
-/* ================================
-   SCSS: TOKENS EN VARIABLES
-   (para usar en componentes)
-   ================================ */
+@mixin respond-up($bp) {
+  $size: map.get($breakpoints, $bp);
+  @if $size {
+    @media (min-width: $size) { @content; }
+  } @else {
+    @warn "⚠️ Breakpoint '#{$bp}' no está definido.";
+  }
+} 
+
+@mixin respond-between($from, $to) {
+  $min: map.get($breakpoints, $from);
+  $max: map.get($breakpoints, $to);
+  @if $min and $max {
+    @media (min-width: $min) and (max-width: $max) { @content; }
+  } @else {
+    @warn "⚠️ Revisa 'from' (#{$from}) y 'to' (#{$to}).";
+  }
+}
+
+/* ================================================
+   SCSS TOKENS ($lv-*)
+   ================================================ */
 
 $lv-font-main: var(--lv-font-main);
 
@@ -134,20 +156,30 @@ $lv-primary-dark: var(--lv-primary-dark);
 $lv-secondary: var(--lv-secondary);
 $lv-accent: var(--lv-accent);
 $lv-title: var(--lv-title);
+
 $lv-bg: var(--lv-bg);
 $lv-surface: var(--lv-surface);
 $lv-surface-soft: var(--lv-surface-soft);
 $lv-text: var(--lv-text);
 $lv-muted: var(--lv-muted);
 
-/* Gradiente principal reutilizable */
-$lv-cta-gradient: linear-gradient(135deg,
-    var(--lv-cta-primary-from),
-    var(--lv-cta-primary-to));
+$lv-purple: var(--lv-purple);
+$lv-purple-dark: var(--lv-purple-dark);
+$lv-purple-soft: var(--lv-purple-soft);
+$lv-purple-soft-alt: var(--lv-purple-soft-alt);
+$lv-purple-from: var(--lv-purple-from);
+$lv-purple-to: var(--lv-purple-to);
 
-/* ================================
+/* Gradiente base azul (por si lo necesitas en mixins) */
+$lv-cta-gradient: linear-gradient(
+  135deg,
+  var(--lv-cta-primary-from),
+  var(--lv-cta-primary-to)
+);
+
+/* ================================================
    MIXINS UTILITARIOS
-   ================================ */
+   ================================================ */
 
 /* Contenedor centrado */
 @mixin lv-container {
@@ -177,13 +209,22 @@ $lv-cta-gradient: linear-gradient(135deg,
 /* Subtítulo hero */
 @mixin lv-hero-subtitle {
   font-size: 1.05rem;
-  color: var(--lv-muted);
+  color: var(--lv-surface);
   font-weight: 400;
 }
 
-/* =========================================
-   BASE CTA
-   ========================================= */
+/* Texto con degradado sutil */
+@mixin lv-gradient-text($from: var(--lv-primary), $to: var(--lv-accent)) {
+  background: linear-gradient(90deg, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ================================================
+   SISTEMA GLOBAL DE CTAS
+   ================================================ */
+
+/* ---------- BASE ---------- */
 
 @mixin lv-cta-base {
   appearance: none;
@@ -196,59 +237,125 @@ $lv-cta-gradient: linear-gradient(135deg,
   justify-content: center;
   gap: 0.5rem;
 
-  border-radius: var(--lv-cta-radius, 999px);
-  font-weight: var(--lv-cta-font-weight, 600);
+  padding: 0.8rem 2rem;
+  border-radius: var(--lv-cta-radius-pill);
+
+  font-family: var(--lv-font-main);
+  font-size: 0.95rem;
+  font-weight: var(--lv-cta-font-weight);
   letter-spacing: 0.02em;
   text-decoration: none;
 
-  transition: all 0.25s ease;
   position: relative;
   overflow: hidden;
   white-space: nowrap;
+
+  transition: all 0.25s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* =========================================
-   TAMAÑOS (usa rem, escalable)
-   ========================================= */
+/* ---------- TAMAÑOS ---------- */
 
-/* Hero / CTA super importante */
 @mixin lv-cta-xl {
-  padding: 1.1rem 3rem;     // ~17.6px x 48px
-  font-size: 1.05rem;       // ~16.8px
+  padding: 1.1rem 3rem;
+  font-size: 1.05rem;
 }
 
-/* CTA principal normal */
 @mixin lv-cta-lg {
-  padding: 0.9rem 2.4rem;   // ~14.4px x 38px
-  font-size: 1rem;          // 16px
+  padding: 0.9rem 2.4rem;
+  font-size: 1rem;
 }
 
-/* Botón estándar por defecto */
 @mixin lv-cta-md {
-  padding: 0.75rem 2rem;    // ~12px x 32px
-  font-size: 0.94rem;       // ~15px
+  padding: 0.75rem 2rem;
+  font-size: 0.94rem;
 }
 
-/* Acciones secundarias / compactas */
 @mixin lv-cta-sm {
-  padding: 0.55rem 1.4rem;  // ~9px x 22px
-  font-size: 0.82rem;       // ~13px
+  padding: 0.55rem 1.4rem;
+  font-size: 0.82rem;
 }
 
-/* =========================================
-   VARIANTES DE COLOR CTA
-   ========================================= */
+/* ---------- PRIMARY (azul marca) ---------- */
 
 @mixin lv-cta-primary {
   @include lv-cta-base;
-  background: linear-gradient(135deg, var(--lv-cta-primary-from), var(--lv-cta-primary-to));
-  color: #fff;
-  box-shadow: 0 10px 25px var(--lv-cta-glow);
+
+  background: linear-gradient(
+    135deg,
+    var(--lv-cta-primary-from),
+    var(--lv-cta-primary-to)
+  );
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 10px 25px var(--lv-cta-primary-glow);
+  z-index: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 20% 0%,
+      rgba(255, 255, 255, 0.26),
+      transparent 65%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
 
   &:hover {
-    background: linear-gradient(135deg, var(--lv-cta-hover-from), var(--lv-cta-hover-to));
-    box-shadow: 0 16px 40px rgba(37, 99, 235, 0.45);
     transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(37, 99, 235, 0.5);
+
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
+  }
+}
+
+/* ---------- OUTLINE (elegante) ---------- */
+
+@mixin lv-cta-outline {
+  @include lv-cta-base;
+
+  background: transparent;
+  color: var(--lv-cta-outline-color);
+  border: 2px solid var(--lv-cta-outline-color);
+  box-shadow: none;
+  z-index: 0;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      var(--lv-cta-primary-from),
+      var(--lv-cta-primary-to)
+    );
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.32s ease;
+    z-index: -1;
+  }
+
+  &:hover {
+    color: #ffffff;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px var(--lv-cta-primary-glow);
+
+    &::before {
+      transform: scaleX(1);
+    }
   }
 
   &:active {
@@ -257,60 +364,143 @@ $lv-cta-gradient: linear-gradient(135deg,
   }
 }
 
-@mixin lv-cta-outline {
-  @include lv-cta-base; 
-  background: #fff;
-  color: var(--lv-primary);
-  border: 2px solid var(--lv-primary);
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: $lv-cta-gradient;
-    opacity: 0;
-    transition: opacity .22s ease;
-    z-index: -1;
-  }
-
-  &:hover {
-    color: #fff;
-
-    &::before {
-      opacity: 1;
-    }
-
-    box-shadow: 0 10px 26px rgba(15, 23, 42, .26);
-  }
-}
+/* ---------- WARNING (dorado bonito) ---------- */
 
 @mixin lv-cta-warning {
   @include lv-cta-base;
-  background-color: var(--lv-warning);
+
+  background: linear-gradient(
+    135deg,
+    var(--lv-cta-warning-from),
+    var(--lv-cta-warning-to)
+  );
   color: #111827;
+  border: none;
+  box-shadow: 0 10px 24px var(--lv-cta-warning-glow);
+  position: relative;
+  z-index: 0;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      circle at 30% 15%,
+      rgba(255, 255, 255, 0.45),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 38px rgba(245, 158, 11, 0.5);
+    filter: saturate(1.08);
+
+    &::after {
+      opacity: 0.85;
+    }
+  }
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 6px 18px rgba(245, 158, 11, 0.35);
+    filter: brightness(0.97);
+  }
 }
 
-/* Texto con degradado sutil */
-@mixin lv-gradient-text($from: var(--lv-primary), $to: var(--lv-accent)) {
-  background: linear-gradient(90deg, $from, $to);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* ---------- GHOST (para fondos oscuros / hero) ---------- */
+
+@mixin lv-cta-ghost {
+  @include lv-cta-base;
+
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+  backdrop-filter: blur(6px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(15, 23, 42, 0.26);
+  }
+
+  &:active {
+    transform: scale(0.97);
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.22);
+  }
 }
 
+/* ---------- LINK (texto clickeable) ---------- */
 
-.sell-hero h1 {
-  @include lv-hero-title;
-  @include lv-gradient-text;// si quieres título con degradado 💙💚
+@mixin lv-cta-link {
+  @include lv-cta-base;
+
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--lv-primary);
+
+  font-size: 0.92rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  gap: 0.25rem;
+
+  &::before,
+  &::after {
+    content: "";
+    display: none;
+  }
+
+  &:hover {
+    color: var(--lv-primary-dark);
+    text-decoration: underline;
+    transform: translateY(0);
+    box-shadow: none;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
 }
 
-.sell-hero .cta-primary {
-  @include lv-cta-primary;
-  @include lv-cta-lg;
+/* =========================================
+   UTILIDADES GLOBALES .cta
+   ========================================= */
+
+.cta {
+  @include lv-cta-base;
+  @include lv-cta-md;
+
+  &:focus-visible {
+    outline: 2px solid var(--lv-primary);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.16);
+  }
 }
 
-.sell-hero .cta-outline {
-  @include lv-cta-outline;
-  @include lv-cta-lg;
+/* Tamaños */
+.cta--xl { @include lv-cta-xl; }
+.cta--lg { @include lv-cta-lg; }
+.cta--md { @include lv-cta-md; }
+.cta--sm { @include lv-cta-sm; }
+
+/* Variantes */
+.cta--primary { @include lv-cta-primary; }
+.cta--outline { @include lv-cta-outline; }
+.cta--warning { @include lv-cta-warning; }
+.cta--ghost   { @include lv-cta-ghost; }
+.cta--link    { @include lv-cta-link; }
+
+/* Mobile: CTAs grandes full width */
+@media (max-width: 768px) {
+  .cta--xl,
+  .cta--lg {
+    width: 100%;
+    max-width: 340px;
+  }
 }
