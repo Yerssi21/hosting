@@ -1,12 +1,13 @@
 import { AfterViewInit, Component, ElementRef, QueryList, ViewChildren } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-haz-tu-pedido',
-  standalone: true,
-  templateUrl: './haz-tu-pedido.component.html',
-  styleUrls: ['./haz-tu-pedido.component.scss'],
+  selector: 'app-intro',
+  imports: [RouterLink],
+  templateUrl: './intro.component.html',
+  styleUrl: './intro.component.scss'
 })
-export class HazTuPedidoComponent implements AfterViewInit {
+export class IntroComponent implements AfterViewInit {
   @ViewChildren('stepCard', { read: ElementRef }) stepCards!: QueryList<ElementRef>;
 
   ngAfterViewInit(): void {

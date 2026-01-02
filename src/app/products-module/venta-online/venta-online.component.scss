@@ -27,19 +27,32 @@
   text-align: center;
 }
 
+.sell-hero__pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(37, 99, 235, 0.08);
+  color: var(--lv-primary);
+  margin-bottom: 0.9rem;
+}
+
 .sell-hero h1 {
   font-family: var(--lv-font-main);
   font-weight: 700;
   font-size: clamp(2.4rem, 1.6rem + 2vw, 3.1rem);
   line-height: 1.15;
   margin: 0 0 0.6rem;
-  /* Gradiente suave de marca */
   background: linear-gradient(90deg, var(--lv-primary), var(--lv-accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.sell-hero p {
+.sell-hero__subtitle {
   font-size: 1.05rem;
   color: var(--lv-muted);
   margin: 0 0 2rem;
@@ -105,77 +118,94 @@
 }
 
 /* ================================================
-   CÓMO FUNCIONA (PASOS)
+   CÓMO FUNCIONA (HEADER + SLIDER)
    ================================================ */
 
 .sell-steps {
   padding: 1.5rem 0 3rem;
-  text-align: center;
 }
 
-.sell-steps h2 {
+.sell-steps__header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 2rem;
+}
+
+.sell-steps__header h2 {
   font-family: var(--lv-font-main);
   font-weight: 700;
   color: var(--lv-title);
   font-size: clamp(2rem, 1.6rem + 1.2vw, 2.4rem);
-  margin: 0 0 1.6rem;
+  margin: 0 0 0.6rem;
 }
 
-.steps {
-  list-style: none;
+.sell-steps__header p {
   margin: 0;
-  padding: 0;
+  font-size: 0.98rem;
+  color: var(--lv-muted);
+  line-height: 1.6;
+}
+
+/* ================================================
+   INTEGRACIONES / CANALES
+   ================================================ */
+
+.sell-integrations {
+  padding: 2.5rem 0 3rem;
+  text-align: center;
+}
+
+.sell-integrations__eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--lv-muted);
+  margin-bottom: 0.4rem;
+}
+
+.sell-integrations h2 {
+  font-family: var(--lv-font-main);
+  font-weight: 700;
+  color: var(--lv-title);
+  font-size: clamp(2rem, 1.6rem + 1.1vw, 2.4rem);
+  margin: 0 0 0.6rem;
+}
+
+.sell-integrations__subtitle {
+  max-width: 620px;
+  margin: 0 auto 1.6rem;
+  font-size: 0.98rem;
+  color: var(--lv-muted);
+  line-height: 1.6;
+}
+
+.sell-integrations__grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.2rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  justify-items: stretch;
 }
 
-.steps li {
+.sell-integrations__item {
   background: #ffffff;
-  border-radius: var(--lv-radius);
-  padding: 1.4rem 1.3rem 1.1rem;
+  border-radius: 999px;
+  padding: 0.75rem 1.1rem;
   box-shadow: var(--lv-shadow-soft);
-  border: 1px solid rgba(229, 231, 235, 0.9);
-  text-align: left;
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    border-color 0.22s ease,
-    background-color 0.22s ease;
-}
-
-.steps .badge {
+  border: 1px solid var(--lv-border-subtle);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 26px;
-  height: 26px;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--lv-title);
+  white-space: nowrap;
+}
+
+.sell-integrations__dot {
+  width: 8px;
+  height: 8px;
   border-radius: 999px;
   background: var(--lv-primary);
-  color: #ffffff;
-  font-size: 0.82rem;
-  font-weight: 600;
-  margin-bottom: 0.35rem;
-}
-
-.steps h4 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 0.25rem;
-  color: var(--lv-title);
-}
-
-.steps p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: var(--lv-muted);
-}
-
-.steps li:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--lv-shadow-md);
-  border-color: rgba(37, 99, 235, 0.22);
-  background-color: #ffffff;
 }
 
 /* ================================================
@@ -228,12 +258,225 @@
   color: var(--lv-title);
 }
 
+.pricing__note {
+  margin: 0.9rem 0 0;
+  font-size: 0.82rem;
+  color: var(--lv-muted);
+}
+
+/* ================================================
+   CASOS DE ÉXITO / CONFIANZA
+   ================================================ */
+
+.sell-evidence {
+  padding: 2.8rem 0 3.2rem;
+}
+
+.sell-evidence__header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+}
+
+.sell-evidence__header h2 {
+  font-family: var(--lv-font-main);
+  font-weight: 700;
+  color: var(--lv-title);
+  font-size: clamp(2rem, 1.7rem + 1vw, 2.4rem);
+  margin: 0 0 0.6rem;
+}
+
+.sell-evidence__header p {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--lv-muted);
+}
+
+.sell-evidence__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.4rem;
+}
+
+.sell-evidence__card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 1.5rem 1.4rem;
+  box-shadow: var(--lv-shadow-soft);
+  border: 1px solid var(--lv-border-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sell-evidence__quote {
+  margin: 0 0 0.6rem;
+  font-size: 0.94rem;
+  color: var(--lv-text);
+}
+
+.sell-evidence__author {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--lv-title);
+}
+
+.sell-evidence__role {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--lv-muted);
+}
+
+/* ================================================
+   COMPARATIVA
+   ================================================ */
+
+.sell-compare {
+  padding: 2.5rem 0 3.2rem;
+}
+
+.sell-compare__header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 1.8rem;
+}
+
+.sell-compare__header h2 {
+  font-family: var(--lv-font-main);
+  font-weight: 700;
+  color: var(--lv-title);
+  font-size: clamp(2rem, 1.7rem + 1vw, 2.3rem);
+  margin: 0 0 0.5rem;
+}
+
+.sell-compare__header p {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--lv-muted);
+}
+
+.sell-compare__table {
+  border-radius: 18px;
+  border: 1px solid var(--lv-border-subtle);
+  overflow: hidden;
+  box-shadow: var(--lv-shadow-soft);
+}
+
+.sell-compare__row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) repeat(2, minmax(0, 1.5fr));
+  align-items: stretch;
+}
+
+.sell-compare__row--head {
+  background: var(--lv-surface-soft);
+}
+
+.sell-compare__cell {
+  padding: 0.85rem 1rem;
+  font-size: 0.9rem;
+  border-bottom: 1px solid rgba(229, 231, 235, 0.9);
+  display: flex;
+  align-items: center;
+}
+
+.sell-compare__cell--head {
+  font-weight: 600;
+  color: var(--lv-title);
+  font-size: 0.92rem;
+}
+
+.sell-compare__cell--good {
+  color: #166534;
+}
+
+.sell-compare__cell--bad {
+  color: #b91c1c;
+}
+
+.sell-compare__row:last-child .sell-compare__cell {
+  border-bottom: none;
+}
+
+/* ================================================
+   FAQ
+   ================================================ */
+
+.sell-faq {
+  padding: 2.5rem 0 3.5rem;
+}
+
+.sell-faq__header {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto 1.8rem;
+}
+
+.sell-faq__header h2 {
+  font-family: var(--lv-font-main);
+  font-weight: 700;
+  color: var(--lv-title);
+  font-size: clamp(2rem, 1.7rem + 1vw, 2.3rem);
+  margin: 0 0 0.5rem;
+}
+
+.sell-faq__header p {
+  margin: 0;
+  font-size: 0.96rem;
+  color: var(--lv-muted);
+}
+
+.sell-faq__list {
+  max-width: 720px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.sell-faq__item {
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(229, 231, 235, 0.95);
+  padding: 0.8rem 1rem;
+}
+
+.sell-faq__item summary {
+  cursor: pointer;
+  list-style: none;
+  font-weight: 600;
+  font-size: 0.96rem;
+  color: var(--lv-title);
+}
+
+.sell-faq__item summary::-webkit-details-marker {
+  display: none;
+}
+
+.sell-faq__item summary::after {
+  content: '+';
+  float: right;
+  font-weight: 400;
+  color: var(--lv-muted);
+}
+
+.sell-faq__item[open] summary::after {
+  content: '–';
+}
+
+.sell-faq__item p {
+  margin: 0.45rem 0 0.2rem;
+  font-size: 0.9rem;
+  color: var(--lv-muted);
+  line-height: 1.55;
+}
+
 /* ================================================
    CTA FINAL
    ================================================ */
 
 .sell-cta {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
   padding: 3rem 0 4rem;
   text-align: center;
 }
@@ -268,7 +511,7 @@
 }
 
 /* ================================================
-   ANIMACIÓN FADE-IN (OPCIONAL)
+   ANIMACIÓN FADE-IN
    ================================================ */
 
 .fade-in {
@@ -291,7 +534,11 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .steps {
+  .sell-evidence__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .sell-integrations__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -301,8 +548,11 @@
     padding-top: 4.5rem;
   }
 
-  .sell-benefits,
-  .steps {
+  .sell-benefits {
+    grid-template-columns: 1fr;
+  }
+
+  .sell-evidence__grid {
     grid-template-columns: 1fr;
   }
 
@@ -311,10 +561,27 @@
     padding: 2.2rem 1.5rem 2.8rem;
     border-radius: 18px;
   }
+
+  .sell-compare__row {
+    grid-template-columns: 1fr;
+  }
+
+  .sell-compare__cell--head:first-child {
+    display: none; /* oculta la primera celda vacía en móvil */
+  }
 }
 
 @media (max-width: 480px) {
   .sell-hero h1 {
     font-size: 2.1rem;
   }
+
+  .sell-integrations__item {
+    white-space: normal;
+  }
 }
+
+/* ================================================
+   FIN SCSS venta-online.component.scss
+   ================================================ */
+ 

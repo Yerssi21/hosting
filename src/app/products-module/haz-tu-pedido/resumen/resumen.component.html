@@ -1,0 +1,107 @@
+<section class="summary container">
+  <header class="summary__header">
+    <p class="summary__step">Paso 5 de 5 · Revisa y confirma</p>
+    <h1 class="summary__title">Resumen de tu pedido personalizado</h1>
+    <p class="summary__subtitle">
+      Comprueba que toda la información es correcta antes de confirmar.
+      Después podrás descargar el resumen o compartirlo con tu equipo.
+    </p>
+  </header>
+
+  <div class="summary__layout">
+    <!-- Columna izquierda: productos + info -->
+    <section class="summary-main">
+      <article class="summary-card">
+        <h2>Productos incluidos</h2>
+
+        <div class="summary-items">
+          <div class="summary-item" *ngFor="let item of items">
+            <div>
+              <p class="summary-item__title">{{ item.name }}</p>
+              <p class="summary-item__meta">
+                {{ item.variant }} · Talla {{ item.size }}
+              </p>
+            </div>
+
+            <div class="summary-item__qty">
+              x{{ item.quantity }}
+            </div>
+
+            <div class="summary-item__price">
+              {{ item.unitPrice * item.quantity | currency:'EUR' }}
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="summary-card">
+        <h2>Datos de envío y facturación</h2>
+        <p class="summary-text">
+          En la versión conectada al backend, aquí aparecerán tus direcciones,
+          datos fiscales y método de envío elegido.
+        </p>
+
+        <ul class="summary-list">
+          <li>Dirección de envío principal</li>
+          <li>Datos fiscales de facturación</li>
+          <li>Teléfono y correo de contacto</li>
+        </ul>
+
+        <p class="summary-text summary-text--muted">
+          De momento estamos en modo maqueta: esta sección sirve para visualizar
+          el diseño de la página. Más adelante la conectaremos con el área
+          cliente.
+        </p>
+      </article>
+    </section>
+
+    <!-- Columna derecha: precios + acciones -->
+    <aside class="summary-side">
+      <div class="summary-side__box">
+        <h2>Costes estimados</h2>
+
+        <dl class="summary-side__rows">
+          <div class="summary-side__row">
+            <dt>Subtotal productos</dt>
+            <dd>{{ subtotal | currency:'EUR' }}</dd>
+          </div>
+          <div class="summary-side__row">
+            <dt>Envío estimado</dt>
+            <dd>{{ shipping | currency:'EUR' }}</dd>
+          </div>
+          <div class="summary-side__row">
+            <dt>Impuestos estimados</dt>
+            <dd>{{ taxes | currency:'EUR' }}</dd>
+          </div>
+          <div class="summary-side__row summary-side__row--total">
+            <dt>Total aproximado</dt>
+            <dd>{{ total | currency:'EUR' }}</dd>
+          </div>
+        </dl>
+
+        <p class="summary-side__note">
+          El importe final se calculará en el backend según los datos reales de
+          envío y tus acuerdos comerciales.
+        </p>
+
+        <div class="summary-side__actions">
+          <a routerLink="/haz-tu-pedido/carrito" class="cta cta--outline cta--md">
+            Volver al carrito
+          </a>
+
+          <button type="button" class="cta cta--primary cta--md">
+            Confirmar pedido (maqueta)
+          </button>
+        </div>
+      </div>
+
+      <div class="summary-side__info">
+        <h3>¿Qué ocurre después?</h3>
+        <p>
+          Una vez confirmado, tu pedido pasaría a producción. En el área cliente
+          podrás ver su estado, descargar facturas y gestionar incidencias.
+        </p>
+      </div>
+    </aside>
+  </div>
+</section>

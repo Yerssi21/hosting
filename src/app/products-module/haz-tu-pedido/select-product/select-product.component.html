@@ -1,0 +1,39 @@
+<section class="product container">
+  <header class="product__header">
+    <h1>Elige un producto</h1>
+    <p class="product__subtitle">
+      Selecciona la base sobre la que aplicarás tu diseño. Más productos pronto.
+    </p>
+  </header>
+
+  <!-- Categorías -->
+  <nav class="product__categories">
+    <button
+      *ngFor="let cat of categories"
+      (click)="selectCat(cat.key)"
+      [class.active]="cat.key === selectedCategory"
+      class="product__cat-btn"
+    >
+      {{ cat.name }}
+    </button>
+  </nav>
+
+  <!-- Grid de productos -->
+  <div class="product__grid">
+    <article
+      class="product-card"
+      *ngFor="let item of filteredProducts"
+    >
+      <img [src]="item.img" [alt]="item.name" />
+      <h3>{{ item.name }}</h3>
+      <p class="price">Desde €{{ item.basePrice }}</p>
+
+      <button
+        routerLink="../editor"
+        class="cta cta--primary cta--md"
+      >
+        Personalizar
+      </button>
+    </article>
+  </div>
+</section>

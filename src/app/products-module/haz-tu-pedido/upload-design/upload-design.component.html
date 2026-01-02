@@ -1,0 +1,37 @@
+<section class="upload container">
+  <h1 class="upload__title">Sube tu diseño</h1>
+  <p class="upload__subtitle">
+    Admite PNG, JPG, SVG y PDF. Tamaño máximo: 15MB.
+  </p>
+
+  <div 
+    class="upload__dropzone"
+    (drop)="onDrop($event)"
+    (dragover)="onDragOver($event)"
+    (click)="fileInput.click()"
+  >
+    <input
+      type="file"
+      #fileInput
+      accept=".png,.jpg,.jpeg,.svg,.pdf"
+      (change)="onFileSelected($event)"
+      hidden
+    />
+
+    <i class="bx bx-upload upload__icon"></i>
+
+    <p>Arrastra tu diseño aquí o <strong>haz clic para seleccionar</strong></p>
+
+    <div *ngIf="preview" class="upload__preview">
+      <img [src]="preview" alt="Vista previa">
+    </div>
+  </div>
+
+  <button 
+    class="cta cta--primary cta--lg upload__next"
+    [disabled]="!preview"
+    routerLink="../productos"
+  >
+    Continuar
+  </button>
+</section>

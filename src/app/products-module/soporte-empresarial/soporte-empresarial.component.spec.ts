@@ -1,23 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SoporteEmpresarialComponent } from './soporte-empresarial.component';
+import { provideRouter } from '@angular/router';
 
 describe('SoporteEmpresarialComponent', () => {
-  let component: SoporteEmpresarialComponent;
-  let fixture: ComponentFixture<SoporteEmpresarialComponent>;
 
-  beforeEach(async () => {
+  beforeEach(async () => { 
     await TestBed.configureTestingModule({
-      imports: [SoporteEmpresarialComponent]
+      imports: [SoporteEmpresarialComponent],
+      providers: [provideRouter([])]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(SoporteEmpresarialComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = TestBed.createComponent(SoporteEmpresarialComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

@@ -1,0 +1,125 @@
+<section class="editor container">
+  <header class="editor__header">
+    <p class="editor__step">Paso 3 de 5 · Personaliza tu producto</p>
+    <h1 class="editor__title">Ajusta tu producto antes de añadirlo al carrito</h1>
+    <p class="editor__subtitle">
+      Revisa el diseño, elige color, tallas y cantidades. Más adelante podrás
+      añadir más productos o duplicar configuraciones.
+    </p>
+  </header>
+
+  <div class="editor__layout">
+    <!-- Vista previa -->
+    <section class="editor-preview">
+      <div class="editor-preview__mock">
+        <div class="editor-preview__product"></div>
+
+        <div class="editor-preview__design">
+          <span>Tu diseño</span>
+        </div>
+      </div>
+
+      <p class="editor-preview__note">
+        Esta es una simulación visual. En la versión final conectaremos el
+        editor con tu archivo real.
+      </p>
+
+      <a
+        routerLink="/haz-tu-pedido/subir-diseno"
+        class="editor-preview__link"
+      >
+        Cambiar diseño
+      </a>
+    </section>
+
+    <!-- Panel derecho de opciones -->
+    <section class="editor-panel">
+      <!-- Variante / color -->
+      <article class="editor-card">
+        <h2>Variante del producto</h2>
+        <p class="editor-card__subtitle">
+          Elige el color de la prenda sobre la que imprimiremos tu diseño.
+        </p>
+
+        <div class="editor-variants">
+          <button
+            *ngFor="let v of variants"
+            type="button"
+            class="editor-variant"
+            [class.editor-variant--active]="v.value === selectedVariant.value"
+            (click)="selectVariant(v)"
+          >
+            <span
+              class="editor-variant__swatch"
+              [style.background]="v.bg"
+            ></span>
+            <span class="editor-variant__name">{{ v.name }}</span>
+          </button>
+        </div>
+      </article>
+
+      <!-- Talla -->
+      <article class="editor-card">
+        <h2>Tallas</h2>
+        <p class="editor-card__subtitle">
+          Más adelante podrás subir un archivo con el reparto de tallas,
+          si lo necesitas.
+        </p>
+
+        <div class="editor-sizes">
+          <button
+            *ngFor="let size of sizes"
+            type="button"
+            class="editor-size"
+            [class.editor-size--active]="size.value === selectedSize.value"
+            (click)="selectSize(size)"
+          >
+            {{ size.label }}
+          </button>
+        </div>
+      </article>
+
+      <!-- Cantidad + coste -->
+      <article class="editor-card editor-card--summary">
+        <h2>Cantidad y coste estimado</h2>
+
+        <div class="editor-qty">
+          <button type="button" (click)="updateQuantity(-10)">-10</button>
+          <button type="button" (click)="updateQuantity(-1)">-</button>
+
+          <span class="editor-qty__value">{{ quantity }}</span>
+
+          <button type="button" (click)="updateQuantity(1)">+</button>
+          <button type="button" (click)="updateQuantity(10)">+10</button>
+        </div>
+
+        <dl class="editor-price">
+          <div class="editor-price__row">
+            <dt>Precio unitario orientativo</dt>
+            <dd>{{ unitPrice | currency:'EUR':'symbol':'1.2-2' }}</dd>
+          </div>
+          <div class="editor-price__row editor-price__row--total">
+            <dt>Total estimado</dt>
+            <dd>{{ totalPrice | currency:'EUR':'symbol':'1.2-2' }}</dd>
+          </div>
+        </dl>
+
+        <div class="editor-card__actions">
+          <a
+            routerLink="/haz-tu-pedido/seleccionar-producto"
+            class="cta cta--outline cta--md"
+          >
+            Volver a productos
+          </a>
+
+          <a
+            routerLink="/haz-tu-pedido/carrito"
+            class="cta cta--primary cta--md"
+          >
+            Añadir al carrito
+          </a>
+        </div>
+      </article>
+    </section>
+  </div>
+</section>

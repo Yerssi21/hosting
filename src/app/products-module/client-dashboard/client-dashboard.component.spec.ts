@@ -1,23 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ClientDashboardComponent } from './client-dashboard.component';
+import { provideRouter } from '@angular/router';
 
 describe('ClientDashboardComponent', () => {
-  let component: ClientDashboardComponent;
-  let fixture: ComponentFixture<ClientDashboardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ClientDashboardComponent]
+      imports: [ClientDashboardComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(ClientDashboardComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = TestBed.createComponent(ClientDashboardComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

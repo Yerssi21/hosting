@@ -1,0 +1,154 @@
+<section class="contact container">
+  <header class="contact__header">
+    <p class="contact__pill">¿Hablamos?</p>
+
+    <h1 class="contact__title">
+      Cuéntanos qué necesitas con Laurrvic Shop
+    </h1>
+
+    <p class="contact__subtitle">
+      Ya sea que estés empezando, quieras vender en volumen o integrar Laurrvic
+      en tu propio sistema, estamos aquí para ayudarte a decidir el siguiente paso.
+    </p>
+  </header>
+
+  <div class="contact__layout">
+    <!-- Columna izquierda: info -->
+    <aside class="contact-info">
+      <h2>¿En qué podemos ayudarte?</h2>
+      <p class="contact-info__text">
+        Rellena el formulario y te responderemos normalmente en menos de 1&nbsp;día hábil.
+      </p>
+
+      <ul class="contact-info__list">
+        <li>
+          <strong>Soporte sobre pedidos</strong>
+          <span>Estados, incidencias, envíos y devoluciones.</span>
+        </li>
+        <li>
+          <strong>Venta y área cliente</strong>
+          <span>Ayuda con cuentas, productos y precios.</span>
+        </li>
+        <li>
+          <strong>Integraciones y proyectos</strong>
+          <span>Conectar Laurrvic a tu tienda o sistema.</span>
+        </li>
+      </ul>
+
+      <div class="contact-info__meta">
+        <p><i class="bx bx-time-five"></i> Horario: Lunes a viernes, 9:00–19:00</p>
+        <p><i class="bx bx-envelope"></i> soporte&#64;laurrvic.com</p>
+      </div>
+    </aside>
+
+    <!-- Columna derecha: formulario -->
+    <section class="contact-form">
+      <h2>Escríbenos</h2>
+
+      <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="nombre">Nombre *</label>
+            <input
+              id="nombre"
+              type="text"
+              formControlName="nombre"
+              placeholder="Tu nombre"
+            />
+            <small
+              *ngIf="hasError('nombre', 'required')"
+              class="form-error"
+            >Este campo es obligatorio.</small>
+            <small
+              *ngIf="hasError('nombre', 'minlength')"
+              class="form-error"
+            >Por favor, escribe al menos 2 caracteres.</small>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Correo electrónico *</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              placeholder="tucorreo&#64;ejemplo.com"
+            />
+            <small
+              *ngIf="hasError('email', 'required')"
+              class="form-error"
+            >El correo es obligatorio.</small>
+            <small
+              *ngIf="hasError('email', 'email')"
+              class="form-error"
+            >Introduce un correo válido.</small>
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="empresa">Marca o empresa (opcional)</label>
+          <input
+            id="empresa"
+            type="text"
+            formControlName="empresa"
+            placeholder="Nombre de tu marca o proyecto"
+          />
+        </div>
+
+        <div class="form-field">
+          <label for="tipoConsulta">Tipo de consulta *</label>
+          <select id="tipoConsulta" formControlName="tipoConsulta">
+            <option value="general">Consulta general</option>
+            <option value="soporte">Soporte de pedidos / área cliente</option>
+            <option value="ventas">Información comercial / precios</option>
+            <option value="integraciones">Integraciones / API / proyectos</option>
+          </select>
+        </div>
+
+        <div class="form-field">
+          <label for="mensaje">Cuéntanos un poco más *</label>
+          <textarea
+            id="mensaje"
+            rows="5"
+            formControlName="mensaje"
+            placeholder="Explícanos brevemente qué necesitas conseguir con Laurrvic Shop"
+          ></textarea>
+          <small
+            *ngIf="hasError('mensaje', 'required')"
+            class="form-error"
+          >Este campo es obligatorio.</small>
+          <small
+            *ngIf="hasError('mensaje', 'minlength')"
+            class="form-error"
+          >Escribe al menos 10 caracteres.</small>
+        </div>
+
+        <div class="form-field form-field--checkbox">
+          <label>
+            <input type="checkbox" formControlName="aceptaPolitica" />
+            <span>
+              He leído y acepto la política de privacidad y el tratamiento de mis datos
+              para recibir respuesta a mi consulta.
+            </span>
+          </label>
+          <small
+            *ngIf="hasError('aceptaPolitica', 'required')"
+            class="form-error"
+          >Debes aceptar la política de privacidad.</small>
+        </div>
+
+        <button
+          type="submit"
+          class="cta cta--primary cta--lg contact-form__submit"
+          [disabled]="submitted && contactForm.invalid"
+        >
+          Enviar mensaje
+        </button>
+
+        <p class="contact-form__note">
+          Nunca venderemos tus datos. Usaremos tu información solo para responder a tu consulta
+          o coordinar contigo próximos pasos.
+        </p>
+      </form>
+    </section>
+  </div>
+</section>

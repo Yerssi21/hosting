@@ -1,23 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavbarComponentComponent } from './navbar.component';
+import { NavbarComponent } from './navbar.component';
+import { provideRouter } from '@angular/router';
 
-describe('NavbarComponentComponent', () => {
-  let component: NavbarComponentComponent;
-  let fixture: ComponentFixture<NavbarComponentComponent>;
+describe('NavbarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NavbarComponentComponent]
+      imports: [NavbarComponent],
+      providers: [provideRouter([])],
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(NavbarComponentComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    const fixture = TestBed.createComponent(NavbarComponent);
+    expect(fixture.componentInstance).toBeTruthy();
   });
 });

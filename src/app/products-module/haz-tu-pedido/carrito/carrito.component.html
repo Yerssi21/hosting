@@ -1,0 +1,102 @@
+<section class="cart container">
+  <header class="cart__header">
+    <p class="cart__step">Paso 4 de 5 · Revisa tu carrito</p>
+    <h1 class="cart__title">Carrito de tu pedido personalizado</h1>
+    <p class="cart__subtitle">
+      Revisa cantidades, variantes y productos antes de continuar. Más adelante
+      podrás introducir datos de envío y facturación.
+    </p>
+  </header>
+
+  <div class="cart__layout">
+    <!-- Lista de ítems -->
+    <section class="cart-list" *ngIf="items.length; else emptyCart">
+      <article class="cart-item" *ngFor="let item of items">
+        <div class="cart-item__media">
+          <div class="cart-item__thumb">
+            <img [src]="item.image" [alt]="item.name" />
+          </div>
+        </div>
+
+        <div class="cart-item__body">
+          <h3 class="cart-item__title">{{ item.name }}</h3>
+          <p class="cart-item__meta">
+            {{ item.variant }} · Talla {{ item.size }}
+          </p>
+
+          <p class="cart-item__info">
+            Cantidad: <strong>{{ item.quantity }}</strong> · Precio unitario:
+            <strong>{{ item.unitPrice | currency:'EUR' }}</strong>
+          </p>
+        </div>
+
+        <div class="cart-item__price">
+          <p>{{ item.unitPrice * item.quantity | currency:'EUR' }}</p>
+          <button type="button" class="cart-item__link">
+            Quitar
+          </button>
+        </div>
+      </article>
+    </section>
+
+    <!-- Carrito vacío -->
+    <ng-template #emptyCart>
+      <section class="cart-empty">
+        <h2>Tu carrito está vacío… de momento</h2>
+        <p>
+          Añade un producto desde el editor para ver aquí el resumen de tu
+          pedido.
+        </p>
+        <a
+          routerLink="/haz-tu-pedido/seleccionar-producto"
+          class="cta cta--primary cta--md"
+        >
+          Elegir productos
+        </a>
+      </section>
+    </ng-template>
+
+    <!-- Resumen lateral -->
+    <aside class="cart-summary">
+      <div class="cart-summary__box">
+        <h2>Resumen</h2>
+
+        <dl class="cart-summary__rows">
+          <div class="cart-summary__row">
+            <dt>Subtotal productos</dt>
+            <dd>{{ subtotal | currency:'EUR' }}</dd>
+          </div>
+          <div class="cart-summary__row">
+            <dt>Envío estimado</dt>
+            <dd>{{ shipping | currency:'EUR' }}</dd>
+          </div>
+          <div class="cart-summary__row cart-summary__row--total">
+            <dt>Total estimado</dt>
+            <dd>{{ total | currency:'EUR' }}</dd>
+          </div>
+        </dl>
+
+        <p class="cart-summary__note">
+          El importe final podrá variar ligeramente según direcciones de envío,
+          peso y volumen. Lo verás detallado en el siguiente paso.
+        </p>
+
+        <div class="cart-summary__actions">
+          <a
+            routerLink="/haz-tu-pedido/seleccionar-producto"
+            class="cta cta--outline cta--md"
+          >
+            Seguir añadiendo productos
+          </a>
+
+          <a
+            routerLink="/haz-tu-pedido/resumen"
+            class="cta cta--primary cta--md"
+          >
+            Continuar al resumen
+          </a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

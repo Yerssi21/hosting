@@ -1,6 +1,12 @@
 <section class="sell-hero container fade-in js-observe">
+  <p class="sell-hero__pill">Para creadores, marcas y tiendas online</p>
+
   <h1>Comienza a vender con Laurrvic Shop</h1>
-  <p>Tu catálogo online, pagos seguros y clientes reales en minutos.</p>
+  <p class="sell-hero__subtitle">
+    Vende productos personalizados sin inventario ni envíos.
+    Laurrvic imprime, empaca y entrega tus pedidos.
+    Tú solo diseñas, publicas y recibes tus ganancias.
+  </p>
 
   <div class="cta-group">
     <a routerLink="/auth/register" class="cta cta--primary cta--lg">
@@ -12,6 +18,7 @@
   </div>
 </section>
 
+<!-- BENEFICIOS -->
 <section class="sell-benefits container fade-in js-observe">
   <article class="card">
     <i class="bx bx-credit-card"></i>
@@ -38,28 +45,49 @@
   </article>
 </section>
 
+<!-- CÓMO FUNCIONA + SLIDER DE PASOS -->
 <section class="sell-steps container fade-in js-observe">
-  <h2>¿Cómo funciona?</h2>
- 
-  <ol class="steps">
-    <li>
-      <span class="badge">1</span>
-      <h4>Regístrate</h4>
-      <p>Crea tu cuenta de vendedor en minutos.</p>
-    </li>
-    <li>
-      <span class="badge">2</span>
-      <h4>Diseña y publica</h4>
-      <p>Usa el diseñador para crear productos únicos.</p>
-    </li>
-    <li>
-      <span class="badge">3</span>
-      <h4>Empieza a vender</h4>
-      <p>Nosotros imprimimos y enviamos. Tú cobras.</p>
-    </li>
-  </ol>
+  <header class="sell-steps__header">
+    <h2>¿Cómo funciona?</h2>
+    <p>
+      Sigue el flujo completo: desde tu primer diseño hasta tener tus productos publicados
+      en tu tienda online.
+    </p>
+  </header>
+
+  <app-steps-slider></app-steps-slider>
 </section>
 
+<!-- INTEGRACIONES / FUTURO E-COMMERCE -->
+<section class="sell-integrations container fade-in js-observe">
+  <p class="sell-integrations__eyebrow">Integraciones y canales de venta</p>
+  <h2>Conecta Laurrvic Shop con tu ecosistema online</h2>
+  <p class="sell-integrations__subtitle">
+    Hoy puedes vender directamente con Laurrvic Shop y, próximamente, conectar tu catálogo
+    con otras plataformas de e-commerce.
+  </p>
+
+  <div class="sell-integrations__grid">
+    <div class="sell-integrations__item">
+      <span class="sell-integrations__dot"></span>
+      <span>Shopify (próximamente)</span>
+    </div>
+    <div class="sell-integrations__item">
+      <span class="sell-integrations__dot"></span>
+      <span>WooCommerce (próximamente)</span>
+    </div>
+    <div class="sell-integrations__item">
+      <span class="sell-integrations__dot"></span>
+      <span>Tiendas propias</span>
+    </div>
+    <div class="sell-integrations__item">
+      <span class="sell-integrations__dot"></span>
+      <span>Ventas directas B2B</span>
+    </div>
+  </div>
+</section>
+
+<!-- TARIFAS -->
 <section class="sell-pricing container fade-in js-observe">
   <h2>Tarifas transparentes</h2>
 
@@ -76,13 +104,143 @@
       <span>Precio de venta sugerido</span>
       <strong>€16.90</strong>
     </div>
+
+    <p class="pricing__note">
+      Ejemplo orientativo. Podrás ajustar tus márgenes según tu estrategia de precios.
+    </p>
   </div>
 
-  <a routerLink="/auth/registro" class="cta cta--primary cta--lg">
+  <a routerLink="/auth/register" class="cta cta--primary cta--lg">
     Crear mi cuenta
   </a>
 </section>
 
+<!-- CASOS DE ÉXITO / CONFIANZA -->
+<section class="sell-evidence container fade-in js-observe">
+  <header class="sell-evidence__header">
+    <h2>Marcas que ya confían en Laurrvic Shop</h2>
+    <p>
+      Desde pequeños creadores hasta equipos completos que lanzan colecciones por campaña.
+    </p>
+  </header>
+
+  <div class="sell-evidence__grid">
+    <article class="sell-evidence__card">
+      <p class="sell-evidence__quote">
+        “Pasamos de hacer pedidos manuales a automatizar todo el flujo. Ahora solo nos
+        preocupamos por lanzar nuevos diseños.”
+      </p>
+      <p class="sell-evidence__author">Estudio Creativo Nórdico</p>
+      <p class="sell-evidence__role">Tienda online de merch</p>
+    </article>
+
+    <article class="sell-evidence__card">
+      <p class="sell-evidence__quote">
+        “Los tiempos de producción y envío nos permiten hacer campañas limitadas sin miedo
+        a quedarnos sin stock.”
+      </p>
+      <p class="sell-evidence__author">Agencia Pixel & Print</p>
+      <p class="sell-evidence__role">Agencia de marketing</p>
+    </article>
+
+    <article class="sell-evidence__card">
+      <p class="sell-evidence__quote">
+        “La integración con nuestro flujo nos ahorró horas de gestión cada semana.”
+      </p>
+      <p class="sell-evidence__author">Marca Urbana 27</p>
+      <p class="sell-evidence__role">Marca de ropa independiente</p>
+    </article>
+  </div>
+</section>
+
+<!-- COMPARATIVA -->
+<section class="sell-compare container fade-in js-observe">
+  <header class="sell-compare__header">
+    <h2>¿Por qué vender con Laurrvic Shop?</h2>
+    <p>
+      Compara el modelo tradicional de stock con el flujo bajo demanda de Laurrvic.
+    </p>
+  </header>
+
+  <div class="sell-compare__table" role="table" aria-label="Comparativa Laurrvic vs modelo tradicional">
+    <div class="sell-compare__row sell-compare__row--head" role="row">
+      <div class="sell-compare__cell sell-compare__cell--head" role="columnheader"></div>
+      <div class="sell-compare__cell sell-compare__cell--head" role="columnheader">Laurrvic Shop</div>
+      <div class="sell-compare__cell sell-compare__cell--head" role="columnheader">Modelo tradicional</div>
+    </div>
+
+    <div class="sell-compare__row" role="row">
+      <div class="sell-compare__cell" role="cell">Inversión inicial en stock</div>
+      <div class="sell-compare__cell sell-compare__cell--good" role="cell">No necesitas stock</div>
+      <div class="sell-compare__cell sell-compare__cell--bad" role="cell">Compra de inventario por adelantado</div>
+    </div>
+
+    <div class="sell-compare__row" role="row">
+      <div class="sell-compare__cell" role="cell">Gestión de envíos</div>
+      <div class="sell-compare__cell sell-compare__cell--good" role="cell">Nosotros imprimimos y enviamos</div>
+      <div class="sell-compare__cell sell-compare__cell--bad" role="cell">Requiere logística propia</div>
+    </div>
+
+    <div class="sell-compare__row" role="row">
+      <div class="sell-compare__cell" role="cell">Riesgo de sobrantes</div>
+      <div class="sell-compare__cell sell-compare__cell--good" role="cell">Producción bajo demanda</div>
+      <div class="sell-compare__cell sell-compare__cell--bad" role="cell">Posible stock muerto</div>
+    </div>
+
+    <div class="sell-compare__row" role="row">
+      <div class="sell-compare__cell" role="cell">Tiempo hasta lanzar colección</div>
+      <div class="sell-compare__cell sell-compare__cell--good" role="cell">Días</div>
+      <div class="sell-compare__cell sell-compare__cell--bad" role="cell">Semanas o meses</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sell-faq container fade-in js-observe">
+  <header class="sell-faq__header">
+    <h2>Preguntas frecuentes</h2>
+    <p>
+      Resolvemos algunas dudas típicas antes de que abras tu cuenta.
+    </p>
+  </header>
+
+  <div class="sell-faq__list">
+    <details class="sell-faq__item" open>
+      <summary>¿Necesito tener una empresa para vender con Laurrvic Shop?</summary>
+      <p>
+        No necesariamente. Puedes comenzar como autónomo o creador independiente.
+        Más adelante podrás actualizar tus datos fiscales desde el área de cliente.
+      </p>
+    </details>
+
+    <details class="sell-faq__item">
+      <summary>¿Puedo usar mis propios diseños?</summary>
+      <p>
+        Sí. El diseñador está pensado para que subas tus propios diseños y los
+        adaptes a distintos productos. Solo debes asegurarte de tener los derechos
+        de uso.
+      </p>
+    </details>
+
+    <details class="sell-faq__item">
+      <summary>¿En qué países puedo vender?</summary>
+      <p>
+        Inicialmente trabajamos con envíos nacionales. Pronto abriremos opciones
+        internacionales que podrás activar desde tu cuenta.
+      </p>
+    </details>
+
+    <details class="sell-faq__item">
+      <summary>¿Cómo se calculan mis ganancias?</summary>
+      <p>
+        Tú defines el precio de venta. Laurrvic descuenta el coste base del producto
+        y el resto es tu margen de beneficio.
+      </p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
 <section class="sell-cta container fade-in js-observe">
   <h2>Listo para empezar</h2>
   <p>Únete hoy y lleva tu marca al siguiente nivel.</p>

@@ -33,15 +33,23 @@ export const routes: Routes = [
             (m) => m.VentaOnlineComponent
           ),
       },
+      {
+        path: 'integraciones',
+        title: 'Integraciones | Laurrvic Shop',
+        data: { hero: 'venta', heroAnim: 'float' },
+        loadComponent: () =>
+          import('./features/integraciones/integraciones.component')
+            .then(m => m.IntegracionesComponent),
+      },
 
       {
         path: 'haz-tu-pedido',
         title: 'Haz tu pedido | Laurrvic Shop',
         data: { hero: 'pedido', heroAnim: 'zoom' },
-        loadComponent: () =>
+        loadChildren: () =>
           import(
-            './products-module/haz-tu-pedido/haz-tu-pedido.component'
-          ).then((m) => m.HazTuPedidoComponent),
+            './products-module/haz-tu-pedido/haz-tu-pedido.routes'
+          ).then((m) => m.routes),
       },
 
       {
@@ -53,7 +61,14 @@ export const routes: Routes = [
             './products-module/soporte-empresarial/soporte-empresarial.component'
           ).then((m) => m.SoporteEmpresarialComponent),
       },
-
+      {
+      path: 'contacto',
+      title: 'Contacto | Laurrvic Shop',
+      data: { hero: 'soporte', heroAnim: 'fadezoom' }, // reutilizamos hero "soporte"
+      loadComponent: () =>
+        import('./features/contacto/contacto.component')
+          .then(m => m.ContactoComponent),
+      },
       {
         path: 'area-cliente',
         title: 'Área cliente | Laurrvic Shop',

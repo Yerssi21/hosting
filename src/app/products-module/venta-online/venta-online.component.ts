@@ -1,10 +1,12 @@
+import { CommonModule } from '@angular/common';
 import { Component, AfterViewInit, OnDestroy } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { StepsSliderComponent } from '../steps-slider/steps-slider.component';
 
 @Component({
   selector: 'app-venta-online',
   standalone: true,
-  imports: [RouterLink],
+  imports: [CommonModule, RouterLink, StepsSliderComponent],
   templateUrl: './venta-online.component.html',
   styleUrls: ['./venta-online.component.scss'],
 })
