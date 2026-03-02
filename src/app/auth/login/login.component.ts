@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { ToastService } from '../../shared/services/toast.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent {
   // ✅ Inyección con `inject()` (Angular moderno)
   private router = inject(Router);
   private toast = inject(ToastService);
+  private auth = inject(AuthService);
 
   // ==============================
   // 🧠 Lógica principal
@@ -41,19 +43,33 @@ export class LoginComponent {
       return;
     }
 
-    const { email } = this.loginForm.value;
+    const { email, password } = this.loginForm.value;
 
-    // Simulación de login
-    this.toast.show({
-      message: `¡Bienvenido de nuevo, ${email}!`,
-      type: 'success',
-      duration: 3000,
+    this.auth.login(email, password).subscribe({
+      next: (response) => {
+        this.toast.show({
+          message: `¡Bienvenido ${response.email}!`,
+          type: 'success',
+          duration: 2500,
+        });
+
+        setTimeout(() => {
+          if (response.role === 'ADMIN') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/home']);
+          }
+        }, 800);
+      },
+
+      error: () => {
+        this.toast.show({
+          message: 'Credenciales inválidas',
+          type: 'error',
+          duration: 3000,
+        });
+      },
     });
-
-    // Pequeño delay visual antes de redirigir
-    setTimeout(() => {
-      this.router.navigate(['/home']);
-    }, 800);
   }
 
   // ==============================
