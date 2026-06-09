@@ -1,6 +1,5 @@
-<nav class="app-nav" role="navigation"
-     [ngClass]="{ 'scrolled': isScrolled, 'menu-open': isMenuOpen }"
-     aria-label="Navegación principal">
+<nav class="app-nav" role="navigation" [ngClass]="{ 'scrolled': isScrolled, 'menu-open': isMenuOpen }"
+  aria-label="Navegación principal">
   <div class="app-nav__container">
     <!-- LOGO -->
     <div class="app-nav__logo">
@@ -10,10 +9,8 @@
     </div>
 
     <!-- Menú de navegación -->
-    <ul class="app-nav__links"
-        [ngClass]="{ 'app-nav__links--show': isMenuOpen }"
-        [attr.aria-hidden]="!isMenuOpen"
-        [attr.aria-expanded]="isMenuOpen">
+    <ul class="app-nav__links" [ngClass]="{ 'app-nav__links--show': isMenuOpen }" [attr.aria-hidden]="!isMenuOpen"
+      [attr.aria-expanded]="isMenuOpen">
       <li class="app-nav__item">
         <a routerLink="/venta-online" class="app-nav__link" (click)="closeMenu()">Vender en línea</a>
       </li>
@@ -27,39 +24,61 @@
 
     <!-- Acciones -->
     <div class="app-nav__actions">
-      <button type="button" class="app-nav__btn app-nav__btn--outline" routerLink="/auth/login" (click)="closeMenu()">
-        <i class="bx bx-log-in"></i>
-        <span class="app-nav__btn--outline-text">Iniciar sesión</span>
-      </button>
-      <button type="button" class="app-nav__btn app-nav__btn--filled" routerLink="/auth/register" (click)="closeMenu()">
-        <i class="bx bx-user"></i>
-        <span class="app-nav__btn--filled-text">Incribirse</span>
-      </button>
-      <div class="app-nav__user" routerLink="/area-cliente" (click)="closeMenu()">
-        <i class="bx bx-user"></i> <span>Área Cliente</span>
-      </div>
-      <div class="app-nav__lang" aria-label="Idioma actual">ES</div>
+
+      <!-- 🔓 Usuario NO logueado -->
+      <ng-container *ngIf="!isLogged()">
+
+        <button type="button" class="app-nav__btn app-nav__btn--outline" routerLink="/auth/login" (click)="closeMenu()">
+          <i class="bx bx-log-in"></i>
+          <span>Iniciar sesión</span>
+        </button>
+
+        <button type="button" class="app-nav__btn app-nav__btn--filled" routerLink="/auth/register"
+          (click)="closeMenu()">
+          <i class="bx bx-user"></i>
+          <span>Inscribirse</span>
+        </button>
+
+      </ng-container>
+
+      <!-- 🔐 Usuario logueado -->
+      <ng-container *ngIf="isLogged()">
+
+        <!-- Área cliente -->
+        <div class="app-nav__user" routerLink="/area-cliente/panel" (click)="closeMenu()">
+          <i class="bx bx-user"></i>
+          <span>Área Cliente</span>
+        </div>
+
+        <!-- Admin solo si rol ADMIN -->
+        <div *ngIf="role() === 'ADMIN'" class="app-nav__user" routerLink="/admin" (click)="closeMenu()">
+          <i class="bx bx-shield"></i>
+          <span>Admin</span>
+        </div>
+
+        <!-- Logout -->
+        <button type="button" class="app-nav__btn app-nav__btn--outline" (click)="logout()">
+          <i class="bx bx-log-out"></i>
+          <span>Cerrar sesión</span>
+        </button>
+
+      </ng-container>
+
+      <div class="app-nav__lang">ES</div>
+
     </div>
 
     <!-- Ícono menú móvil -->
-    <button type="button" class="app-nav__menu"
-            (click)="toggleMenu()"
-            aria-label="Abrir menú"
-            [attr.aria-pressed]="isMenuOpen">
+    <button type="button" class="app-nav__menu" (click)="toggleMenu()" aria-label="Abrir menú"
+      [attr.aria-pressed]="isMenuOpen">
       <i class='bx bx-menu-alt-right' aria-hidden="true"></i>
     </button>
   </div>
 </nav>
 
 <!-- Menú móvil a pantalla completa -->
-<div
-  class="app-menu-overlay"
-  *ngIf="isMenuOpen"
-  role="dialog"
-  aria-modal="true"
-  aria-labelledby="appMenuTitle"
-  (click)="closeMenu()"
->
+<div class="app-menu-overlay" *ngIf="isMenuOpen" role="dialog" aria-modal="true" aria-labelledby="appMenuTitle"
+  (click)="closeMenu()">
   <div class="app-menu-overlay__panel" (click)="$event.stopPropagation()">
     <!-- Cerrar -->
     <button class="app-menu-overlay__close" (click)="closeMenu()" aria-label="Cerrar menú">
@@ -89,14 +108,43 @@
 
     <!-- CTAs -->
     <div class="app-menu-overlay__ctas">
-      <button class="cta cta--warning" routerLink="/contacto" (click)="closeMenu()">CONTACTA</button>
-      <button class="cta cta--primary" routerLink="/area-cliente" (click)="closeMenu()">
-        <i class="bx bx-user"></i> ÁREA CLIENTE
+
+      <button class="cta cta--warning" routerLink="/contacto" (click)="closeMenu()">
+        CONTACTA
       </button>
-      <a class="cta cta--outline" href="mailto:soporte@laurrvic.com" (click)="closeMenu()">SOPORTE&#64;LAURRVIC.COM</a>
+
+      <!-- Si logueado -->
+      <ng-container *ngIf="isLogged()">
+        <button class="cta cta--primary" routerLink="/area-cliente/panel" (click)="closeMenu()">
+          <i class="bx bx-user"></i> ÁREA CLIENTE
+        </button>
+
+        <!-- Admin móvil -->
+        <button *ngIf="role() === 'ADMIN'" class="cta cta--outline" routerLink="/admin" (click)="closeMenu()">
+          <i class="bx bx-shield"></i> ADMIN
+        </button>
+
+        <!-- Logout móvil -->
+        <button class="cta cta--outline" (click)="logout(); closeMenu()">
+          <i class="bx bx-log-out"></i> CERRAR SESIÓN
+        </button>
+      </ng-container>
+
+      <!-- Si NO logueado -->
+      <ng-container *ngIf="!isLogged()">
+        <button class="cta cta--primary" routerLink="/auth/login" (click)="closeMenu()">
+          INICIAR SESIÓN
+        </button>
+      </ng-container>
+
+      <a class="cta cta--outline" href="mailto:soporte@laurrvic.com" (click)="closeMenu()">
+        SOPORTE&#64;LAURRVIC.COM
+      </a>
+
       <a class="cta cta--outline" href="tel:+57100000000" (click)="closeMenu()">
         <i class="bx bx-phone-call"></i> (+57) 100 00 00 00
       </a>
+
     </div>
 
     <div class="app-menu-overlay__meta">LUN–VIERNES, 9H–19H</div>
@@ -104,4 +152,4 @@
 </div>
 
 <!-- Fondo de desenfoque cuando el menú está abierto -->
-<div class="app-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()" aria-hidden="true"></div>  
+<div class="app-backdrop" *ngIf="isMenuOpen" (click)="closeMenu()" aria-hidden="true"></div>

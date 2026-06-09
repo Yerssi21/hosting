@@ -1,0 +1,273 @@
+@use '../../../styles/variables' as *;
+
+.container {
+  max-width: var(--lv-container);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* INTRO */
+
+.home-intro {
+  padding: 4.5rem 0 3rem;
+
+  &__header {
+    max-width: 720px;
+    margin: 0 auto 2rem;
+    text-align: center;
+
+    h2 {
+      font-family: var(--lv-font-main);
+      font-size: clamp(2rem, 1.6rem + 1.2vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--lv-secondary);
+      margin: 0 0 0.6rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 1.02rem;
+      color: var(--lv-muted);
+      line-height: 1.6;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.2rem;
+  }
+}
+
+.home-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.6rem 1.4rem;
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid var(--lv-border-subtle);
+  box-shadow: var(--lv-shadow-soft);
+  text-decoration: none;
+  color: var(--lv-text);
+  transition: all 0.22s ease;
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    background: var(--lv-primary-soft);
+    color: var(--lv-primary);
+
+    i { font-size: 1.4rem; }
+  }
+
+  h3 {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--lv-title);
+  }
+
+  p {
+    font-size: 0.92rem;
+    margin: 0;
+    color: var(--lv-muted);
+    line-height: 1.5;
+  }
+
+  &__link {
+    margin-top: 0.3rem;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: var(--lv-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--lv-shadow-md);
+    border-color: rgba(37, 99, 235, 0.26);
+  }
+}
+
+/* CÓMO FUNCIONA */
+
+.home-how {
+  padding: 2rem 0 3.2rem;
+  text-align: center;
+
+  h2 {
+    font-family: var(--lv-font-main);
+    font-size: clamp(2rem, 1.6rem + 1vw, 2.3rem);
+    font-weight: 700;
+    color: var(--lv-secondary);
+    margin: 0 0 1.6rem;
+  }
+}
+
+.home-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+
+  li {
+    background: #fff;
+    border-radius: 18px;
+    padding: 1.4rem 1.3rem 1.1rem;
+    box-shadow: var(--lv-shadow-soft);
+    border: 1px solid rgba(229,231,235,0.96);
+    text-align: left;
+    transition: all 0.22s ease;
+  }
+
+  .step-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: var(--lv-primary);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+  }
+
+  h4 {
+    margin: 0 0 0.25rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--lv-title);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--lv-muted);
+    line-height: 1.5;
+  }
+
+  li:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--lv-shadow-md);
+    border-color: rgba(37,99,235,0.22);
+  }
+}
+
+/* CONFIANZA */
+
+.home-trust {
+  padding: 1rem 0 3rem;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0,1fr));
+    gap: 1.2rem;
+  }
+
+  &__item {
+    padding: 1.5rem 1.3rem;
+    border-radius: 18px;
+    background: #fff;
+    border: 1px solid var(--lv-border-subtle);
+    box-shadow: var(--lv-shadow-soft);
+    transition: all 0.22s ease;
+
+    h3 {
+      margin: 0 0 0.3rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--lv-title);
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--lv-muted);
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--lv-shadow-md);
+      border-color: rgba(37,99,235,0.22);
+    }
+  }
+
+  &__note {
+    margin-top: 0.8rem;
+    font-size: 0.78rem;
+    color: var(--lv-muted);
+    text-align: right;
+  }
+}
+
+/* CTA FINAL */
+
+.home-cta {
+  padding: 2rem 0 4rem;
+  text-align: center;
+
+  h2 {
+    font-family: var(--lv-font-main);
+    font-size: clamp(2rem, 1.8rem + 1vw, 2.4rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--lv-secondary);
+    margin: 0 0 0.6rem;
+  }
+
+  p {
+    margin: 0 0 1.8rem;
+    font-size: 0.98rem;
+    color: var(--lv-muted);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.9rem;
+  }
+}
+
+/* Fade in */
+
+.fade-in {
+  opacity: 1;
+  transform: translateY(14px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.fade-in.is-visible {
+  opacity: 1; 
+  transform: translateY(0);
+}
+
+/* Responsive */
+
+@media (max-width: 1024px) {
+  .home-intro__grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  .home-steps { grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+@media (max-width: 768px) {
+  .home-intro { padding-top: 3.2rem; }
+  .home-intro__grid,
+  .home-steps,
+  .home-trust__grid { grid-template-columns: 1fr; }
+  .home-trust__note { text-align: left; }
+}
+
+@media (max-width: 480px) {
+  .home-intro__header h2 { font-size: 1.9rem; }
+}
